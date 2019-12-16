@@ -10,14 +10,16 @@ chrome.browserAction.setBadgeText({text: 'New'});
 
 console.log('\'Allo \'Allo! Event Page for Browser Action');
 
-chrome.storage.sync.get(['urls'], function(result) {
+
+chrome.storage.sync.get(['links'], function(result) {
+
   log.debug('background.js - url salvate: ', result);
 
   // se ci sono url impostati
-  if(result.urls) {
+  if(result.links) {
 
     // per ogni url impostata
-    result.urls.forEach(urlObj => {
+    result.links.forEach(urlObj => {
 
       // se è impostata la URL
       if(urlObj.url) {
