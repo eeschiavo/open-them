@@ -2,7 +2,8 @@
 import * as log from 'loglevel';
 import * as prefix from 'loglevel-plugin-prefix';
 import React from 'react';
-import ReactDOM from 'reac-dom';
+import ReactDOM from 'react-dom';
+import Popup from './popup-page/popup.component.jsx';
 
 prefix.reg(log);
 log.enableAll();
@@ -43,4 +44,9 @@ let openOptions = function() {
 // rimuovo il badge
 chrome.browserAction.setBadgeText({text: ''});
 
-document.getElementById("open-options").addEventListener("click", openOptions);
+ReactDOM.render(
+  <Popup />,
+  document.getElementById('popup-root')
+);
+
+//document.getElementById("open-options").addEventListener("click", openOptions);
