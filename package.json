@@ -10,6 +10,7 @@
     "@babel/preset-env": "^7.7.6",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-css-modules-transform": "^1.6.2",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
     "del": "^2.2.0",
@@ -63,10 +64,12 @@
   "dependencies": {
     "@babel/preset-react": "^7.7.4",
     "babel-preset-react-app": "^3.1.2",
+    "bootstrap": "^4.4.1",
     "chalk": "^3.0.0",
     "loglevel": "^1.6.6",
     "loglevel-plugin-prefix": "^0.8.4",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0"
   }
 }

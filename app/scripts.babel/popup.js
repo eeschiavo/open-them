@@ -1,9 +1,11 @@
 'use strict';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import * as log from 'loglevel';
 import * as prefix from 'loglevel-plugin-prefix';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Popup from './popup-page/popup.component.jsx';
+
 
 prefix.reg(log);
 log.enableAll();
