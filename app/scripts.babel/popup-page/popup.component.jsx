@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as log from 'loglevel';
+import  { Container, Row, Col } from 'react-bootstrap';
 
 class Popup extends React.Component {
 
@@ -15,11 +16,15 @@ class Popup extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.openOptions}>
-          Open options
-        </button>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+              <button onClick={this.openOptions}>
+                Open options
+              </button>
+            </Col>
+          </Row>
+      </Container>
     )
   }
 }
