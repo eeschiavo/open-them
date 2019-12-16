@@ -100,7 +100,10 @@ gulp.task('babel', () => {
    browserify({
      entries: `./app/scripts.babel/${file}`,
      debug: true
-   }).transform('babelify', { presets: ['@babel/preset-env', '@babel/react'] })
+   }).transform('babelify', { presets: [
+     '@babel/preset-env',
+     '@babel/react'
+   ] })
      .bundle()
      .pipe(source(file))
      .pipe(gulp.dest('app/scripts'))
@@ -143,6 +146,11 @@ gulp.task('package', function () {
   return gulp.src('dist/**')
       .pipe($.zip('OpenThem-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
+});
+
+gulp.task('copy', function () {
+  gulp.src(['node_modules/bootstrap/dist/**/*'])
+    .pipe(gulp.dest('dist/scripts/libs/bootstrap'));
 });
 
 gulp.task('build', (cb) => {
