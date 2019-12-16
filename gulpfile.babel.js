@@ -155,7 +155,7 @@ gulp.task('copy', function () {
 
 gulp.task('build', (cb) => {
   runSequence(
-    'lint', 'babel', 'chromeManifest',
+    'copy', 'lint', 'babel', 'chromeManifest',
     ['html', 'images', 'extras'],
     'size', cb);
 });
