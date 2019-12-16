@@ -2,9 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './option-page/welcome.component.jsx';
+import * as log from 'loglevel';
 
-// rimuovo il badge
-chrome.browserAction.setBadgeText({text: ''});
+log.warn('Loglevel enabled');
 
 ReactDOM.render(
   <Welcome name="Ernesto" />,
