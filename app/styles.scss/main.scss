@@ -3,4 +3,5 @@ body {
   padding: $padding;
 }
 
-@import "popup";
+@import 'popup',
+        'options';

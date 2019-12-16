@@ -137,6 +137,8 @@ gulp.task('watch', ['lint', 'babel'], () => {
   ]).on('change', $.livereload.reload);
 
   gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/scripts.babel/**/*.jsx', ['lint', 'babel']);
+  gulp.watch('app/scripts.babel/popup-page/*.js', ['lint', 'babel']);
   gulp.watch('app/styles.scss/**/*.scss', ['styles']);
   gulp.watch('bower.json', ['wiredep']);
 });
