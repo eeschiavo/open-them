@@ -1,9 +1,10 @@
 'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Welcome from './option-page/welcome.component.jsx';
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <Welcome name="Ernesto" />,
   document.getElementById('root')
 );
 
