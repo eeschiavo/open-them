@@ -7,5 +7,3 @@ ReactDOM.render(
   <Welcome name="Ernesto" />,
   document.getElementById('root')
 );
-
-console.log('\'Allo \'Allo! Option');
