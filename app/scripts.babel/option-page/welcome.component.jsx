@@ -29,7 +29,15 @@ class Welcome extends React.Component {
   }
 
   render() {
-    return <h1>Welcome, {this.props.name}</h1>
+    return (
+      <Container>
+        <Row>
+          <Col>
+            Test
+          </Col>
+        </Row>
+      </Container>
+    )
   }
 }
 
