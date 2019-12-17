@@ -97,8 +97,8 @@ class Welcome extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Row>
+      <Container className="options-page">
+        <Row className="options-page__links-row">
           {
             this.state.links &&
             this.state.links.map((link, index) => {

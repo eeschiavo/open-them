@@ -3,5 +3,10 @@ body {
   padding: $padding;
 }
 
-@import 'popup',
-        'options';
+@import
+'common/constants',
+'common/mixins',
+'common/superbem',
+'blocks/options-page/options-page',
+'blocks/options-page/__links-row/links-row',
+'popup';
