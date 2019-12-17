@@ -24,6 +24,9 @@ chrome.storage.sync.get(['links'], function(result) {
       // se è impostata la URL
       if(urlObj.url) {
 
+        //TODO remove
+        return;
+        
         //se è in incognito
         if(urlObj.incognito) {
 

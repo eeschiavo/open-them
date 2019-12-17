@@ -1,7 +1,9 @@
 @include nestedBlock('domain') {
   @include nestedElement('name') {
+    @include ellipsed-text;
     text-align: center;
     margin: 0;
     font-weight: 500;
+    width: 100%;
   }
 }

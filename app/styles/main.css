@@ -2,6 +2,13 @@ body {
   padding: 20px;
 }
 
+.react-contextmenu--visible {
+  background: white;
+  z-index: 10;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 20px, #eeeeee 0px 0px 0px 1px;
+}
+
 .options-page {
   width: 100%;
   height: 100%;
@@ -9,6 +16,7 @@ body {
 
 .add-link {
   max-width: 100px !important;
+  min-height: 104px !important;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -86,12 +94,17 @@ body {
   background-image: url(../images/icons/vertical-menu.png);
   background-size: 20px;
   background-repeat: no-repeat;
+  outline: 0;
 }
 
 .domain .domain__name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   text-align: center;
   margin: 0;
   font-weight: 500;
+  width: 100%;
 }
 
 .popup-body {
