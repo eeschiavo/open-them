@@ -13,7 +13,8 @@ class Link extends React.Component {
 
     this.state = {
       domainIcon: '',
-      firstLetter: this.props.linkObj.domain.charAt(0)
+      firstLetter: this.props.linkObj.domain.charAt(0),
+      enabled: this.props.linkObj.enabled
     }
 
     this.contextMenuId = 'vertical-menu-'+RandomInt();
@@ -21,6 +22,8 @@ class Link extends React.Component {
     this.removeLink = this.removeLink.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleButtonRelease = this.handleButtonRelease.bind(this);
+    this.disableLink = this.disableLink.bind(this);
+    this.enableLink = this.enableLink.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +60,26 @@ class Link extends React.Component {
     this.props.removeLink(this.props.linkObj, this.props.index);
   }
 
+  /**
+   * Disabilizatione di un link (per il lancio automatico)
+   */
+  disableLink() {
+    this.setState({enabled: false}, () => {
+      this.props.linkObj.enabled = false;
+      this.props.updateLink(this.props.linkObj, this.props.index);
+    });
+  }
+
+  /**
+   * Abilitazione di un link (per il lancio automatico)
+   */
+  enableLink() {
+    this.setState({enabled: true}, () => {
+      this.props.linkObj.enabled = true;
+      this.props.updateLink(this.props.linkObj, this.props.index);
+    });
+  }
+
   render() {
 
     let link = this.props.linkObj;
@@ -66,7 +89,7 @@ class Link extends React.Component {
 
         <MenuProvider id={this.contextMenuId}>
           <Col
-              className="domain"
+              className={'domain '+(!this.state.enabled ? 'domain--disabled':'')}
               onTouchStart={this.handleButtonPress}
               onTouchEnd={this.handleButtonRelease}
               onMouseDown={this.handleButtonPress}
@@ -102,9 +125,28 @@ class Link extends React.Component {
 
         <Menu id={this.contextMenuId}>
           <Item onClick={this.removeLink}>
-            <IconFont className="fa fa-trash-alt" />
+            <IconFont className="fas fa-trash contentmenu-icon" />
             Rimuovi
           </Item>
+          {
+            this.state.enabled &&
+            (
+              <Item onClick={this.disableLink}>
+                <IconFont className="fas fa-minus-square contentmenu-icon" />
+                Disabilita
+              </Item>
+            )
+          }
+          {
+            !this.state.enabled &&
+            (
+              <Item onClick={this.enableLink}>
+                <IconFont className="fas fa-plus-square contentmenu-icon" />
+                Abilita
+              </Item>
+            )
+          }
+
          {/*
            <Separator />
            <Submenu label="Foobar">

@@ -33,6 +33,8 @@ class Welcome extends React.Component {
     });
 
     this.removeLink = this.removeLink.bind(this);
+    this.updateLink = this.updateLink.bind(this);
+    this.updateSavedLinks = this.updateSavedLinks.bind(this);
     this.modalCloseCallback = this.modalCloseCallback.bind(this);
   }
 
@@ -69,19 +71,40 @@ class Welcome extends React.Component {
 
     // rimuovo quello specitificato
     links.splice(index, 1);
-
     log.debug('removeLink - links rimasti: ', links);
+
+    this.updateSavedLinks(links);
+  }
+
+  /**
+   * Aggiornamento di un link nello storage
+   * @param link il link da aggiornare
+   * @param index l'indice del link da aggiornare
+   */
+  updateLink(link, index) {
+
+      let links = this.state.links;
+      links[index] = link;
+
+      this.updateSavedLinks(links);
+  }
+
+  /**
+   * Aggiornamento dei links nello state e nello storage
+   * @param links i links aggiornati
+   */
+  updateSavedLinks(links) {
 
     // aggiorno lo state
     this.setState({
       links: links
     }, () => {
 
-      log.debug('removeLink - link rimosso dalla pagina');
+      log.debug('updateSavedLinks - link aggiornato nello state');
 
       // salvo le modifiche nello storage
-      chrome.storage.sync.set({links: this.state.links}, () => {
-        log.debug('removeLink - link rimosso dallo storage');
+      chrome.storage.sync.set({links: links}, () => {
+        log.debug('removeLink - link aggiornato nello storage');
       });
     });
   }
@@ -98,7 +121,8 @@ class Welcome extends React.Component {
                   key={index}
                   linkObj={link}
                   index={index}
-                  removeLink={this.removeLink}>
+                  removeLink={this.removeLink}
+                  updateLink={this.updateLink}>
                 </Link>
               )
             })
