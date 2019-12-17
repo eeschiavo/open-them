@@ -49,20 +49,9 @@ class Welcome extends React.Component {
       links: this.state.links.concat(value)
     }, () => {
 
-      // aggiunto il link allo storage
-      chrome.storage.sync.get(['links'], (result) => {
-
-        let array = result.links ? result.links : [];
-
-        let links = array.concat(this.state.links);
-
-        log.debug('modalCloseCallback - salvo i links: ', links);
-
-        chrome.storage.sync.set({links: links}, function() {
-          log.debug('modalCloseCallback - link aggiunto');
-        });
+      chrome.storage.sync.set({links: this.state.links}, function() {
+        log.debug('modalCloseCallback - link aggiunto');
       });
-
     });
   }
 

@@ -165,6 +165,8 @@ gulp.task('package', function () {
 gulp.task('copy', function () {
   gulp.src(['node_modules/bootstrap/dist/**/*'])
     .pipe(gulp.dest('dist/scripts/libs/bootstrap'));
+  gulp.src(['node_modules/react-contexify/dist/*'])
+      .pipe(gulp.dest('dist/scripts/libs/react-contexify'));
 });
 
 gulp.task('build', (cb) => {
