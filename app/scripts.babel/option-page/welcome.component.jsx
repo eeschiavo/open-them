@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import AddLink from "./add-link.component.jsx";
+import Link from './link.component.jsx';
 
 /**
 * Component principale della pagina options
@@ -31,6 +32,7 @@ class Welcome extends React.Component {
 
     });
 
+    this.removeLink = this.removeLink.bind(this);
     this.modalCloseCallback = this.modalCloseCallback.bind(this);
   }
 
@@ -103,7 +105,12 @@ class Welcome extends React.Component {
             this.state.links &&
             this.state.links.map((link, index) => {
               return (
-                <Col key={index} onClick={() => this.removeLink(link, index)}>{link.url}</Col>
+                <Link
+                  key={index}
+                  linkObj={link}
+                  index={index}
+                  removeLink={this.removeLink}>
+                </Link>
               )
             })
           }
