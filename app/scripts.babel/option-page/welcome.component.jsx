@@ -16,7 +16,12 @@ class Welcome extends React.Component {
 
     chrome.storage.sync.get(['links'], (result) => {
       log.debug(result);
-      this.setState({links: result.links});
+      if(result.links) {
+        this.setState({links: result.links});
+      } else {
+        this.setState({links: []});
+      }
+
     });
 
     this.modalCloseCallback = this.modalCloseCallback.bind(this);
@@ -27,7 +32,9 @@ class Welcome extends React.Component {
    * @param value
    */
   modalCloseCallback(value) {
+
     log.debug('Welcome - modalCloseCallback: ', value);
+
     this.setState({
       links: this.state.links.concat(value)
     }, () => {
@@ -72,6 +79,7 @@ class Welcome extends React.Component {
       <Container>
         <Row>
           {
+            this.state.links &&
             this.state.links.map((link, index) => {
               return (
                 <Col key={index} onClick={() => this.removeLink(link, index)}>{link.url}</Col>
