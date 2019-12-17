@@ -3,6 +3,10 @@ import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import AddLink from "./add-link.component.jsx";
 
+/**
+* Component principale della pagina options
+* @author Ernesto Schiavo - schiavo.ernesto@gmail.com
+*/
 class Welcome extends React.Component {
 
   constructor(props) {
@@ -14,8 +18,11 @@ class Welcome extends React.Component {
       links: []
     };
 
+    // recupero i links
     chrome.storage.sync.get(['links'], (result) => {
-      log.debug(result);
+
+      log.debug('Welcome - links recuperati dallo storage: ', result);
+
       if(result.links) {
         this.setState({links: result.links});
       } else {
@@ -29,24 +36,28 @@ class Welcome extends React.Component {
 
   /**
    * Callback richiamata alla chiusura del modal del component AddLink
-   * @param value
+   * @param value quanto inserito nel modal (link e incognito)
    */
   modalCloseCallback(value) {
 
-    log.debug('Welcome - modalCloseCallback: ', value);
+    log.info('modalCloseCallback - valore dal modal: ', value);
 
+    // aggiunto il link allo state
     this.setState({
       links: this.state.links.concat(value)
     }, () => {
 
+      // aggiunto il link allo storage
       chrome.storage.sync.get(['links'], (result) => {
 
         let array = result.links ? result.links : [];
 
         let links = array.concat(this.state.links);
-        log.debug('Welcome - salvo i links: ', links);
+
+        log.debug('modalCloseCallback - salvo i links: ', links);
+
         chrome.storage.sync.set({links: links}, function() {
-          log.debug('Welcome - link aggiunto');
+          log.debug('modalCloseCallback - link aggiunto');
         });
       });
 
@@ -55,21 +66,31 @@ class Welcome extends React.Component {
 
   /**
    * Cancellazione di un link
+   * @param link il link da rimuovere
+   * @param index l'indice del link da rimuovere
    */
   removeLink(link, index) {
 
+    log.info('removeLink - richiesta rimozione del link: ', link);
+
+    // recupero i links attuali
     let links = this.state.links;
+
+    // rimuovo quello specitificato
     links.splice(index, 1);
 
-    log.debug('Welcome - links rimasti: ', links);
+    log.debug('removeLink - links rimasti: ', links);
 
+    // aggiorno lo state
     this.setState({
       links: links
     }, () => {
-      log.debug('Welcome - link rimosso dalla pagina');
-      chrome.storage.sync.set({links: this.state.links}, () => {
-        log.debug('Welcome - link rimosso dallo storage');
 
+      log.debug('removeLink - link rimosso dalla pagina');
+
+      // salvo le modifiche nello storage
+      chrome.storage.sync.set({links: this.state.links}, () => {
+        log.debug('removeLink - link rimosso dallo storage');
       });
     });
   }
