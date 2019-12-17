@@ -1,0 +1,5 @@
+@include block('domain') {
+  @include modifier('disabled') {
+    opacity: 0.6;
+  }
+}

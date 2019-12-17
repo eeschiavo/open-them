@@ -3,6 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import ReactModal from 'react-modal';
 import psl from 'psl';
+import { UuidV4, IsValidURL } from '../common/utilities.js';
 
 ReactModal.setAppElement('#options-root');
 
@@ -81,7 +82,7 @@ class AddLink extends React.Component {
     }
 
     // verifico valdità URL
-    if(!url || !this.isValidURL(url)) {
+    if(!url || !IsValidURL(url)) {
       alert('Inserire un indirizzo valido');
     } else {
       await this.closeModal();
@@ -89,7 +90,9 @@ class AddLink extends React.Component {
       const value = {
         url: url,
         domain: psl.get(this.extractHostname(url)),
-        incognito: this.state.incognito
+        incognito: this.state.incognito,
+        enabled: true,
+        id: UuidV4()
       };
 
       this.props.closeCallback(value);
@@ -137,16 +140,7 @@ class AddLink extends React.Component {
     this.setState({showModal: false});
   }
 
-  /**
-   * Verifica validità URL
-   * @param str la stringa da validare
-   * @returns {""|boolean}
-   */
-  isValidURL(str) {
-    let a  = document.createElement('a');
-    a.href = str;
-    return (a.host && a.host != window.location.host);
-  }
+
 
   /**
    * Render
