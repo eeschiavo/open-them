@@ -1,0 +1,158 @@
+/// Courtesy of https://github.com/pittkost/superbem
+
+@mixin nestedBlock($name) {
+    .#{$name} {
+        $nestedBlock:    $name !global;
+        $nestedThis:     $name !global;
+
+        @content;
+
+        $nestedBlock:    null !global;
+        $nestedThis:     null !global;
+    }
+}
+@mixin nestedElement($name) {
+    $nestedThis: #{$nestedBlock}__#{$name} !global;
+
+    @if (global-variable-exists(nestedElement) and $nestedElement) or (global-variable-exists(nestedModifier) and $nestedModifier) {
+
+        $nestedElement: #{$nestedBlock}__#{$name} !global;
+
+        .#{$nestedElement} {
+            @content;
+        }
+
+    } @else {
+        $nestedElement: #{$nestedBlock}__#{$name} !global;
+
+        .#{$nestedElement} {
+            @content;
+        }
+    }
+
+    $nestedThis:    $nestedBlock !global;
+    $nestedElement: null !global;
+}
+
+@mixin nestedModifier($name) {
+    .#{$nestedThis}--#{$name} {
+        $modifier: #{$nestedThis}__#{$name} !global;
+
+        @extend .#{$nestedThis} !optional;
+        @content;
+
+        $nestedModifier: null !global;
+    }
+}
+
+@mixin block($name) {
+    .#{$name} {
+        $block:    $name !global;
+        $this:     $name !global;
+
+        @content;
+
+        $block:    null !global;
+        $this:     null !global;
+    }
+}
+
+@mixin nb($name) {
+    @include nestedBlock($name);
+}
+
+@mixin ne($name) {
+    @include nestedElement($name);
+}
+
+@mixin nm($name) {
+    @include nestedModifier($name);
+}
+
+@mixin b($name) {
+    @include block($name);
+}
+
+@mixin element($name) {
+    $this: #{$block}__#{$name} !global;
+
+    @if (global-variable-exists(element) and $element) or (global-variable-exists(modifier) and $modifier) {
+        $element: #{$block}__#{$name} !global;
+
+        .#{$element} {
+            @content;
+        }
+    } @else {
+        $element: #{$block}__#{$name} !global;
+
+        @at-root .#{$element} {
+            @content;
+        }
+    }
+
+    $this:    $block !global;
+    $element: null !global;
+}
+
+@mixin e($name) {
+    @include element($name);
+}
+
+@mixin modifier($name) {
+    @at-root .#{$this}--#{$name} {
+        $modifier: #{$this}__#{$name} !global;
+
+        @extend .#{$this} !optional;
+        @content;
+
+        $modifier: null !global;
+    }
+}
+
+@mixin m($name) {
+    @include modifier($name);
+}
+
+@mixin is-after($scope) {
+    $expression: null;
+
+    @if str-index(#{$scope}, '.') {
+        $expression: '#{$scope} + .#{$this}';
+    } @else if str-index($scope, '__') {
+        $expression: '.#{$scope} + .#{$this}';
+    } @else {
+        $expression: '.#{$block}__#{$scope} + .#{$this}';
+    }
+
+    @at-root #{$expression} {
+        @content;
+    }
+}
+
+@mixin is-preceded-by($scope) {
+    @if str-index(#{$scope}, '.') {
+        $expression: '#{$scope} ~ .#{$this}';
+    } @else if str-index($scope, '__') {
+        $expression: '.#{$scope} ~ .#{$this}';
+    } @else {
+        $expression: '.#{$block}__#{$scope} ~ .#{$this}';
+    }
+
+    @at-root #{$expression} {
+        @content;
+    }
+}
+
+@mixin is-inside($scope) {
+    @if str-index(#{$scope}, '.') {
+        $expression: '#{$scope} > .#{$this}';
+    } @else if str-index($scope, '__') {
+        $expression: '.#{$scope} > .#{$this}';
+    } @else {
+        $expression: '.#{$block}__#{$scope} > .#{$this}';
+    }
+
+    @at-root #{$expression} {
+        @content;
+    }
+}

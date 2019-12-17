@@ -1,0 +1,125 @@
+/// Block Element
+/// @access public
+/// @param {String} $element - il nome dell'elemento
+@mixin element($element) {
+    &__#{$element} {
+        @content;
+    }
+}
+
+/// Block Modifier
+/// @access public
+/// @param {String} $modifier - il nome del modifier
+@mixin modifier($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}
+
+/// ellipsis del testo
+@mixin ellipsed-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/// rimozione dell'appearance di default
+@mixin appearance-none {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+        -ms-appearance: none;
+         -o-appearance: none;
+}
+
+/// selezione disabilitata
+@mixin not-selectable() {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+}
+
+/// border-radius
+@mixin border-radius($radius:$ot--border-radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+            border-radius: $radius;
+}
+
+/// border-radius a sinistra
+@mixin border-radius-left($radius:$ot--border-radius) {
+    -webkit-border-bottom-left-radius: $radius;
+       -webkit-border-top-left-radius: $radius;
+        -moz-border-radius-bottomleft: $radius;
+           -moz-border-radius-topleft: $radius;
+            border-bottom-left-radius: $radius;
+               border-top-left-radius: $radius;
+}
+
+/// border-radius a destra
+@mixin border-radius-right($radius:$ot--border-radius) {
+    -webkit-border-bottom-right-radius: $radius;
+       -webkit-border-top-right-radius: $radius;
+        -moz-border-radius-bottomright: $radius;
+           -moz-border-radius-topright: $radius;
+            border-bottom-right-radius: $radius;
+               border-top-right-radius: $radius;
+}
+
+/// border-radius in alto
+@mixin border-radius-top($radius:$ot--border-radius) {
+    -webkit-border-top-right-radius: $radius;
+     -webkit-border-top-left-radius: $radius;
+        -moz-border-radius-topright: $radius;
+         -moz-border-radius-topleft: $radius;
+            border-top-right-radius: $radius;
+             border-top-left-radius: $radius;
+}
+
+/// border-radius in basso
+@mixin border-radius-bottom($radius:$ot--border-radius) {
+    -webkit-border-bottom-right-radius: $radius;
+     -webkit-border-bottom-left-radius: $radius;
+        -moz-border-radius-bottomright: $radius;
+         -moz-border-radius-bottomleft: $radius;
+            border-bottom-right-radius: $radius;
+             border-bottom-left-radius: $radius;
+}
+
+/// transition di default di OpenThem
+@mixin ot-transition($element,
+                     $transition--default-duration,
+                     $timing-function:$transition--default-timing-function,
+                     $delay:$transition--default-delay) {
+     -webkit-transition: $element $duration $timing-function $delay;
+        -moz-transition: $element $duration $timing-function $delay;
+             transition: $element $duration $timing-function $delay;
+}
+
+
+@mixin optional-at-root($sel) {
+	@at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    	@content;
+  	}
+}
+
+/// placeholder
+@mixin placeholder {
+
+	@include optional-at-root('::-webkit-input-placeholder') {
+    	@content;
+  	}
+
+  	@include optional-at-root(':-moz-placeholder') {
+    	@content;
+  	}
+
+  	@include optional-at-root('::-moz-placeholder') {
+    	@content;
+  	}
+
+ 	@include optional-at-root(':-ms-input-placeholder') {
+    	@content;
+  	}
+}

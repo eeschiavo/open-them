@@ -1,0 +1,13 @@
+.add-link {
+  max-width: 100px !important;
+  min-height: 104px !important;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}

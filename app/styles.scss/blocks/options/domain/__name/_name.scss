@@ -1,0 +1,7 @@
+@include nestedBlock('domain') {
+  @include nestedElement('name') {
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+  }
+}
