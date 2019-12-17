@@ -20,6 +20,7 @@ const customStyles = {
 
 /**
  * Component per l'aggiunta di un link
+ * @author Ernesto Schiavo - schiavo.ernesto@gmail.com
  */
 class AddLink extends React.Component {
 
@@ -45,7 +46,7 @@ class AddLink extends React.Component {
 
   /**
    * Change del campo di input
-   * @param event
+   * @param event event del campo di input per l'inserimento del link
    */
   handleChange(event) {
     this.setState({
@@ -53,6 +54,10 @@ class AddLink extends React.Component {
     });
   }
 
+  /**
+   * Toggle per la modalità incognito
+   * @param event event del campo di input (type checkbox)
+   */
   toggleChange(event) {
     this.setState({
       incognito: !this.state.incognito
@@ -141,7 +146,9 @@ class AddLink extends React.Component {
             {/* URL */}
             <label>
               Indirizzo:
-              <input type="text" value={this.state.url} onChange={this.handleChange} />
+              <input type="text"
+                     value={this.state.url}
+                     onChange={this.handleChange} />
             </label>
 
             {/* INCOGNITO */}
@@ -155,7 +162,9 @@ class AddLink extends React.Component {
             <input type="submit" value="Submit" />
           </form>
 
-          <button onClick={this.closeModal}>Close Modal</button>
+          <button onClick={this.closeModal}>
+            Close Modal
+          </button>
 
         </ReactModal>
 
