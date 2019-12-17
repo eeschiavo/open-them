@@ -1,6 +1,6 @@
 'use strict';
 
-import * as log from "loglevel";
+import * as log from 'loglevel';
 
 chrome.runtime.onInstalled.addListener(details => {
   console.log('previousVersion', details.previousVersion);
@@ -26,7 +26,7 @@ chrome.storage.sync.get(['links'], function(result) {
 
         //TODO remove
         return;
-        
+
         //se è in incognito
         if(urlObj.incognito) {
 
