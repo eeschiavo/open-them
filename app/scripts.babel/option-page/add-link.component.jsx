@@ -155,12 +155,14 @@ class AddLink extends React.Component {
   render() {
 
     return (
-      <Container className="add-link">
+      <Col className="add-link">
 
-        <button
-            className="add-link__button"
-            onClick={this.openModal}>
+        <button onClick={this.openModal} className="add-link__button">
         </button>
+
+        <p className="add-link__description">
+          Aggiungi
+        </p>
 
         <ReactModal
           isOpen={this.state.showModal}
@@ -196,7 +198,7 @@ class AddLink extends React.Component {
 
         </ReactModal>
 
-      </Container>
+      </Col>
     )
   }
 }
