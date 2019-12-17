@@ -4,9 +4,10 @@ body {
 }
 
 @import
-'common/constants',
-'common/mixins',
-'common/superbem',
+'utilities/constants',
+'utilities/mixins',
+'utilities/superbem',
+'blocks/common/lds-spinner/lds-spinner',
 'blocks/libraries/react-contextmenu/--visible/react-contextmenu--visible',
 'blocks/options/options-page/options-page',
 'blocks/options/options-page/__links-row/options-page__links-row',

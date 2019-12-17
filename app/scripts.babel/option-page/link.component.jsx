@@ -4,7 +4,7 @@ import * as log from 'loglevel';
 import axios from 'axios';
 import { RandomInt } from '../common/utilities.js';
 import { Menu, Item, Separator, IconFont, Submenu, MenuProvider } from 'react-contexify';
-
+import Spinner from '../common/spinner.component.jsx';
 
 class Link extends React.Component {
 
@@ -110,12 +110,14 @@ class Link extends React.Component {
               )
             }
             {
-              (!this.state.domainIcon ||
-              this.state.domainIcon == '') &&
+              !this.state.domainIcon ||
+              this.state.domainIcon == '' &&
               (
-                <div>{this.state.firstLetter}</div>
+                <Spinner
+                  visible={true} />
               )
             }
+
             <p className="domain__name">
               {this.props.linkObj.domain}
             </p>
