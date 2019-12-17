@@ -167,6 +167,8 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('dist/scripts/libs/bootstrap'));
   gulp.src(['node_modules/react-contexify/dist/*'])
       .pipe(gulp.dest('dist/scripts/libs/react-contexify'));
+  gulp.src(['node_modules/@fortawesome/fontawesome-free/css/*'])
+  .pipe(gulp.dest('dist/scripts/libs/fontawesome/css'));
 });
 
 gulp.task('build', (cb) => {
