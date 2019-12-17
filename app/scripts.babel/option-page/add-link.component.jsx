@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import ReactModal from 'react-modal';
+import psl from 'psl';
 
 ReactModal.setAppElement('#options-root');
 
@@ -75,6 +76,10 @@ class AddLink extends React.Component {
 
     let url = this.state.url;
 
+    if(url && !url.startsWith('http')) {
+      url = 'https://'+url;
+    }
+
     // verifico valdità URL
     if(!url || !this.isValidURL(url)) {
       alert('Inserire un indirizzo valido');
@@ -82,13 +87,33 @@ class AddLink extends React.Component {
       await this.closeModal();
 
       const value = {
-        url: this.state.url,
+        url: url,
+        domain: psl.get(this.extractHostname(url)),
         incognito: this.state.incognito
       };
 
       this.props.closeCallback(value);
     }
   }
+
+  extractHostname(url) {
+    var hostname;
+    //find & remove protocol (http, ftp, etc.) and get hostname
+
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    }
+    else {
+        hostname = url.split('/')[0];
+    }
+
+    //find & remove port number
+    hostname = hostname.split(':')[0];
+    //find & remove "?"
+    hostname = hostname.split('?')[0];
+
+    return hostname;
+}
 
   /**
    * Apertura del modal per richiedere le informazioni per il link
@@ -130,9 +155,12 @@ class AddLink extends React.Component {
   render() {
 
     return (
-      <Container>
+      <Container className="add-link">
 
-        <button onClick={this.openModal}>+</button>
+        <button
+            className="add-link__button"
+            onClick={this.openModal}>
+        </button>
 
         <ReactModal
           isOpen={this.state.showModal}
