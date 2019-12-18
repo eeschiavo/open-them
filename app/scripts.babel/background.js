@@ -10,6 +10,7 @@ chrome.browserAction.setBadgeText({text: 'New'});
 
 console.log('\'Allo \'Allo! Event Page for Browser Action');
 
+chrome.runtime.openOptionsPage();
 
 chrome.storage.sync.get(['links'], function(result) {
 

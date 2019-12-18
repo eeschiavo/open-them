@@ -2,5 +2,7 @@
   @include nestedElement('description') {
     margin: 0;
     text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
   }
 }

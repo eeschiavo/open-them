@@ -35,24 +35,36 @@ class AddLink extends React.Component {
 
     this.state = {
       url: '',
+      name: '',
       incognito: false,
       showModal: false
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeUrl = this.handleChangeUrl.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleChange = this.toggleChange.bind(this);
   }
 
   /**
-   * Change del campo di input
+   * Change del campo di input dell'URL
    * @param event event del campo di input per l'inserimento del link
    */
-  handleChange(event) {
+  handleChangeUrl(event) {
     this.setState({
       url: event.target.value
+    });
+  }
+
+  /**
+   * Change del campo di input del nome
+   * @param event event del campo di input per l'inserimento del nome
+   */
+  handleChangeName(event) {
+    this.setState({
+      name: event.target.value
     });
   }
 
@@ -92,6 +104,7 @@ class AddLink extends React.Component {
         domain: psl.get(this.extractHostname(url)),
         incognito: this.state.incognito,
         enabled: true,
+        name: this.state.name,
         id: UuidV4()
       };
 
@@ -172,7 +185,7 @@ class AddLink extends React.Component {
               Indirizzo:
               <input type="text"
                      value={this.state.url}
-                     onChange={this.handleChange} />
+                     onChange={this.handleChangeUrl} />
             </label>
 
             {/* INCOGNITO */}
@@ -183,6 +196,15 @@ class AddLink extends React.Component {
                      onChange={this.toggleChange}
               />
             </label>
+
+            {/* NAME */}
+            <label>
+              Nome:
+              <input type="text"
+                     value={this.state.name}
+                     onChange={this.handleChangeName} />
+            </label>
+
             <input type="submit" value="Submit" />
           </form>
 

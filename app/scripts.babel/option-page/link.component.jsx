@@ -11,12 +11,22 @@ class Link extends React.Component {
   constructor(props) {
     super(props);
 
+    log.info('Link - constructor');
+
     this.state = {
       domainIcon: '',
-      firstLetter: this.props.linkObj.domain.charAt(0),
-      enabled: this.props.linkObj.enabled
+      firstLetter: (this.props.linkObj.name ?
+        this.props.linkObj.name.charAt(0) :
+        this.props.linkObj.domain.charAt(0)),
+      enabled: this.props.linkObj.enabled,
+      iconRetrieved: false,
+      useIconFallback: false
     }
 
+    const domain = this.props.linkObj.domain;
+    log.debug('Link - constructor - dominio: ', domain);
+
+    this.domainIcon = 'https://otbesticon.herokuapp.com/icon?url='+domain+'&size=80..120..200';
     this.contextMenuId = 'vertical-menu-'+RandomInt();
 
     this.removeLink = this.removeLink.bind(this);
@@ -30,16 +40,12 @@ class Link extends React.Component {
 
     log.info('Link - componentDidMount');
 
-    const domain = this.props.linkObj.domain;
-    log.debug('componentDidMount - dominio: ', domain);
-
-    const domainIcon = 'https://otbesticon.herokuapp.com/icon?url='+domain+'&size=80..120..200';
-
-    axios.get(domainIcon)
+    axios.get(this.domainIcon)
       .then(res => {
-        this.setState({ domainIcon });
+        this.setState({ domainIcon: this.domainIcon, iconRetrieved: true });
       }).catch(err => {
         log.error('componentDidMount - fallito recupero della favicon');
+        this.setState({useIconFallback: true});
       });
   }
 
@@ -103,23 +109,40 @@ class Link extends React.Component {
             </button>
             */}
             {
-              this.state.domainIcon &&
-              this.state.domainIcon != '' &&
+              this.state.iconRetrieved &&
               (
                 <img className="domain__favicon" src={this.state.domainIcon} />
               )
             }
             {
-              !this.state.domainIcon ||
-              this.state.domainIcon == '' &&
+              !this.state.iconRetrieved &&
+              !this.state.useIconFallback &&
               (
-                <Spinner
-                  visible={true} />
+                <Spinner visible={true}></Spinner>
+              )
+            }
+            {
+              this.state.useIconFallback &&
+              (
+                <div className="domain__favicon domain__favicon--fallback">
+                {this.state.firstLetter}
+                </div>
               )
             }
 
             <p className="domain__name">
-              {this.props.linkObj.domain}
+              {
+                this.props.linkObj.name &&
+                (
+                  <span>{this.props.linkObj.name}</span>
+                )
+              }
+              {
+                !this.props.linkObj.name &&
+                (
+                  <span>{this.props.linkObj.domain}</span>
+                )
+              }
             </p>
 
           </Col>

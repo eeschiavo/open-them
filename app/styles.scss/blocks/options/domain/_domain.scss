@@ -1,12 +1,17 @@
 .domain {
   @include border-radius(8px);
-  
-  max-width: 100px !important;
+
+  max-width: 110px !important;
+  min-width: 110px;
+  min-height: 120px;
+  max-height: 120px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
+  cursor: pointer;
+  padding: 10px !important;
 
   &:hover {
     background-color: #f5f5f5;
