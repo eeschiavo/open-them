@@ -98,11 +98,213 @@ body {
   }
 }
 
-.react-contextmenu--visible {
-  background: white;
-  z-index: 10;
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 20px, #eeeeee 0px 0px 0px 1px;
+.form-switch {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.form-switch p {
+  margin: 0 10px 4px 0;
+}
+
+.form-switch i {
+  position: relative;
+  display: inline-block;
+  margin-right: .5rem;
+  width: 46px;
+  height: 26px;
+  background-color: #e6e6e6;
+  border-radius: 23px;
+  vertical-align: text-bottom;
+  transition: all 0.3s linear;
+}
+
+.form-switch i::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 42px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 11px;
+  transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
+  transition: all 0.25s linear;
+}
+
+.form-switch i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 11px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
+  transform: translate3d(2px, 2px, 0);
+  transition: all 0.2s ease-in-out;
+}
+
+.form-switch:active i::after {
+  width: 28px;
+  transform: translate3d(2px, 2px, 0);
+}
+
+.form-switch:active input:checked + i::after {
+  transform: translate3d(16px, 2px, 0);
+}
+
+.form-switch input {
+  display: none;
+}
+
+.form-switch input:checked + i {
+  background-color: #ccc;
+}
+
+.form-switch input:checked + i::before {
+  transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0);
+}
+
+.form-switch input:checked + i::after {
+  transform: translate3d(22px, 2px, 0);
+}
+
+.input-effect {
+  align-items: center;
+  justify-content: center;
+}
+
+.input-effect .col {
+  max-width: 80%;
+  margin: 20px;
+  padding: 0;
+}
+
+.input-effect__move-and-color {
+  border: 0;
+  padding: 7px 15px;
+  border: 1px solid #ccc;
+  position: relative;
+  background: transparent;
+}
+
+.input-effect__move-and-color ~ .focus-bg:before,
+.input-effect__move-and-color ~ .focus-bg:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background-color: #ededed;
+  transition: 0.3s;
+  z-index: -1;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.input-effect__move-and-color:focus ~ .focus-bg:before,
+.has-content.input-effect__move-and-color ~ .focus-bg:before {
+  transition: 0.3s;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.input-effect__move-and-color ~ .focus-bg:after {
+  left: auto;
+  right: 50%;
+  top: auto;
+  bottom: 50%;
+}
+
+.input-effect__move-and-color:focus ~ .focus-bg:after,
+.has-content.input-effect__move-and-color ~ .focus-bg:after {
+  transition: 0.3s;
+  width: 51%;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.input-effect__move-and-color ~ label {
+  position: absolute;
+  left: 14px;
+  width: 100%;
+  top: 8px;
+  color: #aaa;
+  transition: 0.3s;
+  z-index: -1;
+  letter-spacing: 0.5px;
+}
+
+.input-effect__move-and-color:focus ~ label,
+.has-content.input-effect__move-and-color ~ label {
+  top: -28px;
+  left: 0;
+  color: #333;
+  transition: 0.3s;
+}
+
+input.input-effect__move-and-color[type="text"] {
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  outline: none;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.ot-button, .ot-button--confirm, .ot-button--cancel {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 8px 20px;
+  background-color: #3390FF;
+  border: none;
+  outline: none;
+  color: white;
+  width: 110px;
+}
+
+.ot-button:focus, .ot-button--confirm:focus, .ot-button--cancel:focus, .ot-button:visited, .ot-button--confirm:visited, .ot-button--cancel:visited {
+  outline: none;
+}
+
+.ot-button:hover, .ot-button--confirm:hover, .ot-button--cancel:hover {
+  font-weight: 600;
+}
+
+.ot-button--cancel {
+  background-color: white;
+  border: 1px solid #3390FF;
+  color: #333;
+}
+
+.ReactModal__Content {
+  border-radius: 8px !important;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px, #f0f0f0 0px 0px 0px 1px;
+  border: none !important;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .options-page {
@@ -187,6 +389,9 @@ body {
 
 .domain__favicon--fallback {
   text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 2;
 }
 
 .domain .domain__vertical-menu, .domain--disabled .domain__vertical-menu {
@@ -220,12 +425,29 @@ body {
   color: #333;
 }
 
-.contextmenu-icon {
-  padding-top: 2px;
-}
-
 .domain--disabled {
   opacity: 0.6;
+}
+
+.link-modal__title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  color: #3390FF;
+}
+
+.link-modal__incognito {
+  margin: 0 30px;
+}
+
+.link-modal__buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 30px;
+}
+
+.link-modal__buttons button:first-child {
+  margin-right: 10px;
 }
 
 .popup-body {

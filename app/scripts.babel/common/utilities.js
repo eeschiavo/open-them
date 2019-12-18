@@ -33,7 +33,34 @@ export function UuidV4() {
  * @returns {""|boolean}
  */
 export function IsValidURL(str) {
-  let a  = document.createElement('a');
+  /*let a  = document.createElement('a');
   a.href = str;
-  return (a.host && a.host != window.location.host);
+  return (a.host && a.host != window.location.host);*/
+  var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+  var regexp = new RegExp(expression);
+  return regexp.test(str);
+}
+
+
+/**
+ * Estrazione dell'hostname da una URL
+ * @param  url la URL dalla quale estrarre l'hostname
+ * @return l'hostname dell'URL
+ */
+export function ExtractHostname(url) {
+  var hostname;
+
+  if (url.indexOf("//") > -1) {
+      hostname = url.split('/')[2];
+  }
+  else {
+      hostname = url.split('/')[0];
+  }
+
+  //find & remove port number
+  hostname = hostname.split(':')[0];
+  //find & remove "?"
+  hostname = hostname.split('?')[0];
+
+  return hostname;
 }

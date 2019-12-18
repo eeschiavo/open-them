@@ -1,0 +1,8 @@
+@include block('ReactModal') {
+  @include element('Content') {
+      border-radius: 8px !important;
+      box-shadow: rgba(0, 0, 0, 0.20) 0px 10px 20px,
+                  rgb(240, 240, 240) 0px 0px 0px 1px;
+      border: none !important;
+  }
+}

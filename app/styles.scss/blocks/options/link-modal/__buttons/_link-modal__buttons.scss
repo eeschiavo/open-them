@@ -1,0 +1,11 @@
+@include block('link-modal') {
+  @include element('buttons') {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 30px;
+
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+}

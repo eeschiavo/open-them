@@ -1,0 +1,20 @@
+.ot-button {
+  @include appearance-none;
+  @include border-radius(8px);
+  @include ellipsed-text;
+
+  padding: 8px 20px;
+  background-color: $color-success;
+  border: none;
+  outline: none;
+  color: white;
+  width: 110px;
+
+  &:focus, &:visited {
+    outline: none;
+  }
+
+  &:hover {
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,7 @@
+@include block('ot-button') {
+  @include modifier('cancel') {
+    background-color: white;
+    border: 1px solid $color-success;
+    color: #333;
+  }
+}

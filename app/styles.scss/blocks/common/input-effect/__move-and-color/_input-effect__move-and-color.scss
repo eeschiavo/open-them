@@ -1,0 +1,82 @@
+@include block('input-effect') {
+  @include element('move-and-color') {
+    border: 0;
+    padding: 7px 15px;
+    border: 1px solid #ccc;
+    position: relative;
+    background: transparent;
+  }
+}
+
+.input-effect__move-and-color ~ .focus-bg:before,
+.input-effect__move-and-color ~ .focus-bg:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background-color: #ededed;
+  transition: 0.3s;
+  z-index: -1;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+
+.input-effect__move-and-color:focus ~ .focus-bg:before,
+.has-content.input-effect__move-and-color ~ .focus-bg:before {
+  transition: 0.3s;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.input-effect__move-and-color ~ .focus-bg:after {
+  left: auto;
+  right: 50%;
+  top: auto;
+  bottom: 50%;
+}
+
+.input-effect__move-and-color:focus ~ .focus-bg:after,
+.has-content.input-effect__move-and-color ~ .focus-bg:after {
+  transition: 0.3s;
+  width: 51%;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.input-effect__move-and-color ~ label {
+  position: absolute;
+  left: 14px;
+  width: 100%;
+  top: 8px;
+  color: #aaa;
+  transition: 0.3s;
+  z-index: -1;
+  letter-spacing: 0.5px;
+}
+
+.input-effect__move-and-color:focus ~ label,
+.has-content.input-effect__move-and-color ~ label {
+  top: -28px;
+  left: 0;
+  color: #333;
+  transition: 0.3s;
+}
+
+input.input-effect__move-and-color[type="text"] {
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  outline: none;
+  @include border-radius(8px);
+}
