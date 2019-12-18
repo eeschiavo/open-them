@@ -1,5 +1,7 @@
+'use strict';
+
 /** @type {LinkData} Classe per la rappresenzaione dei dati di un link */
-export class LinkData {
+class LinkData {
   constructor(id, url, domain, incognito, enabled, name) {
     this.id = id;
     this.url = url;
@@ -9,3 +11,5 @@ export class LinkData {
     this.name = name;
   }
 }
+
+export default LinkData;
