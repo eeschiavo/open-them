@@ -5,6 +5,7 @@ import axios from 'axios';
 import { RandomInt } from '../common/utilities.js';
 import { Menu, Item, Separator, IconFont, Submenu, MenuProvider } from 'react-contexify';
 import Spinner from '../common/spinner.component.jsx';
+import LinkModal from './link-modal.component.jsx';
 
 class Link extends React.Component {
 
@@ -21,7 +22,9 @@ class Link extends React.Component {
       enabled: this.props.linkObj.enabled,
       iconRetrieved: false,
       useIconFallback: false
-    }
+    };
+
+    this.modalRef = React.createRef();
 
     const domain = this.props.linkObj.domain;
     log.debug('Link - constructor - dominio: ', domain);
@@ -34,8 +37,13 @@ class Link extends React.Component {
     this.handleButtonRelease = this.handleButtonRelease.bind(this);
     this.disableLink = this.disableLink.bind(this);
     this.enableLink = this.enableLink.bind(this);
+    this.editLink = this.editLink.bind(this);
+    this.modalClosed = this.modalClosed.bind(this);
   }
 
+  /**
+   * ComponentDiMount
+   */
   componentDidMount() {
 
     log.info('Link - componentDidMount');
@@ -49,12 +57,37 @@ class Link extends React.Component {
       });
   }
 
+  /**
+   * Modifica di un link esistente
+   */
+  editLink() {
+    this.modalRef.current.openModal(true, this.props.linkObj);
+  }
+
+  /**
+   * Salvataggio del link dopo la chiusura del modal
+   * @param value eventuale dati del link
+   */
+  modalClosed(value) {
+
+    // se è presente un oggetto ovvero un nuovo link lo salvo
+    if(value) {
+      this.props.closeCallback(value);
+    }
+  }
+
+  /**
+   * Attivazione del long press sul link
+   */
   handleButtonPress () {
     this.buttonPressTimer = setTimeout(() => {
       alert('long press activated')
     }, 1500);
   }
 
+  /**
+   * Cancellazione del long press
+   */
   handleButtonRelease () {
     clearTimeout(this.buttonPressTimer);
   }
@@ -101,13 +134,6 @@ class Link extends React.Component {
               onMouseDown={this.handleButtonPress}
               onMouseUp={this.handleButtonRelease}
               onMouseLeave={this.handleButtonRelease}>
-
-            {/*
-            <button
-              className="domain__vertical-menu"
-              onClick={(e) => this.openVerticalMenu(e)}>
-            </button>
-            */}
             {
               this.state.iconRetrieved &&
               (
@@ -148,11 +174,20 @@ class Link extends React.Component {
           </Col>
         </MenuProvider>
 
+        <LinkModal isEdit={true}
+                   ref={this.modalRef}
+                   url={this.props.linkObj.url}
+                   name={this.props.linkObj.name}
+                   incognito={this.props.linkObj.incognito}
+                   enabled={this.props.linkObj.enabled}
+                   modalClosed={this.modalClosed} />
+
         <Menu id={this.contextMenuId}>
-          <Item onClick={this.removeLink}>
-            <IconFont className="fas fa-trash contentmenu-icon" />
-            Rimuovi
+          <Item onClick={this.editLink}>
+            <IconFont className="fas fa-edit contentmenu-icon" />
+            Edit
           </Item>
+          <Separator />
           {
             this.state.enabled &&
             (
@@ -171,14 +206,10 @@ class Link extends React.Component {
               </Item>
             )
           }
-
-         {/*
-           <Separator />
-           <Submenu label="Foobar">
-              <Item onClick={this.onClick}>Foo</Item>
-              <Item onClick={this.onClick}>Bar</Item>
-           </Submenu>
-          */}
+          <Item onClick={this.removeLink}>
+            <IconFont className="fas fa-trash contentmenu-icon" />
+            Rimuovi
+          </Item>
       </Menu>
       </React.Fragment>
     )

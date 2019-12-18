@@ -10,7 +10,7 @@ ReactModal.setAppElement('#options-root');
 
 const customStyles = {
   content : {
-    top                   : '50%',
+    top                   : '40%',
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
@@ -29,6 +29,7 @@ class LinkModal extends React.Component {
       url: this.props.url ? this.props.url : '',
       name: this.props.name ? this.props.name : '',
       incognito: this.props.incognito ? this.props.incognito : false,
+      linkData: {},
       showModal: this.props.showModal,
       enabled: this.props.enabled,
       isEdit: this.props.isEdit
@@ -96,8 +97,10 @@ class LinkModal extends React.Component {
 
     } else {
 
+      const id = this.state.linkData && this.state.linkData.id ? this.state.linkData.id : UuidV4();
+
       const value = new LinkData(
-        UuidV4(),
+        id,
         url,
         psl.get(ExtractHostname(url)),
         this.state.incognito,
@@ -113,12 +116,14 @@ class LinkModal extends React.Component {
   /**
    * Apertura del modal per richiedere le informazioni per il link
    */
-  async openModal() {
+  async openModal(isEdit, linkData) {
     log.info('AddLink - openModal');
 
     await this.setState(
       {
-        showModal: true
+        showModal: true,
+        isEdit: isEdit,
+        linkData: linkData ? linkData : {}
       });
   }
 
@@ -212,7 +217,19 @@ class LinkModal extends React.Component {
               <button className="ot-button ot-button--confirm"
                       type="submit"
                       value="Submit">
-                Aggiungi
+                {
+                  !this.state.isEdit &&
+                  (
+                    'Aggiungi'
+                  )
+                }
+                {
+                  this.state.isEdit &&
+                  (
+                    'Modifica'
+                  )
+                }
+
               </button>
             </Col>
           </Row>
