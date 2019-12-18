@@ -40,7 +40,7 @@ class Link extends React.Component {
 
     log.info('Link - componentDidMount');
 
-    axios.get(this.domainIcon)
+    axios.get(this.domainIcon, {timeout: 5000})
       .then(res => {
         this.setState({ domainIcon: this.domainIcon, iconRetrieved: true });
       }).catch(err => {
