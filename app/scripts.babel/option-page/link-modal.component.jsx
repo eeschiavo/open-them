@@ -4,6 +4,7 @@ import * as log from 'loglevel';
 import ReactModal from 'react-modal';
 import psl from 'psl';
 import { UuidV4, IsValidURL, ExtractHostname } from '../common/utilities.js';
+import LinkData from '../models/link-data.model.js'
 
 ReactModal.setAppElement('#options-root');
 
@@ -95,14 +96,14 @@ class LinkModal extends React.Component {
 
     } else {
 
-      const value = {
-        url: url,
-        domain: psl.get(ExtractHostname(url)),
-        incognito: this.state.incognito,
-        enabled: this.props.enabled,
-        name: this.state.name,
-        id: UuidV4()
-      };
+      const value = new LinkData(
+        UuidV4(),
+        url,
+        psl.get(ExtractHostname(url)),
+        this.state.incognito,
+        this.props.enabled,
+        this.state.name,
+      );
 
       await this.closeModal(null, value);
 
