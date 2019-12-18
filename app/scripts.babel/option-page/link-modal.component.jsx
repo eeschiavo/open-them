@@ -148,7 +148,7 @@ class LinkModal extends React.Component {
       <ReactModal
         isOpen={this.state.showModal}
         onRequestClose={this.closeModal}
-        style={customStyles}>
+        className={(this.state.incognito ? 'ReactModal--incognito':'')}>
 
         <p className="link-modal link-modal__title">
           {
