@@ -1,0 +1,10 @@
+@include block('domain') {
+  @include element('favicon') {
+    @include modifier('fallback') {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 2;
+    }
+  }
+}

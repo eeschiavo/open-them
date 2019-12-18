@@ -2,9 +2,9 @@
   @include nestedElement('favicon') {
 
     @include border-radius(50%);
-    width: 60px;
-    height: 60px;
+    width: $link-image-width;
+    height: $link-image-height;
     padding: 10px;
-    background: #e6e6e6;
+    background: $link-image-background-color;
   }
 }

@@ -118,7 +118,7 @@ class Welcome extends React.Component {
             this.state.links.map((link, index) => {
               return (
                 <Link
-                  key={index}
+                  key={index+''+link.id}
                   linkObj={link}
                   index={index}
                   removeLink={this.removeLink}

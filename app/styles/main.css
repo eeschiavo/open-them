@@ -13,8 +13,8 @@ body {
 .lds-spinner div {
   transform-origin: 40px 40px;
   animation: lds-spinner 1.2s linear infinite;
-  margin-top: -18px;
-  margin-left: -18px;
+  margin-top: -10px;
+  margin-left: -10px;
 }
 
 .lds-spinner div:after {
@@ -111,8 +111,10 @@ body {
 }
 
 .add-link {
-  max-width: 100px !important;
-  min-height: 104px !important;
+  max-width: 110px !important;
+  min-width: 110px;
+  min-height: 120px;
+  max-height: 120px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -149,25 +151,31 @@ body {
 .add-link .add-link__description {
   margin: 0;
   text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
 }
 
 .domain, .domain--disabled {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  max-width: 100px !important;
+  max-width: 110px !important;
+  min-width: 110px;
+  min-height: 120px;
+  max-height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
+  cursor: pointer;
+  padding: 10px !important;
 }
 
 .domain:hover, .domain--disabled:hover {
   background-color: #f5f5f5;
 }
 
-.domain .domain__favicon, .domain--disabled .domain__favicon {
+.domain .domain__favicon, .domain--disabled .domain__favicon, .domain .domain__favicon--fallback, .domain--disabled .domain__favicon--fallback {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -175,6 +183,10 @@ body {
   height: 60px;
   padding: 10px;
   background: #e6e6e6;
+}
+
+.domain__favicon--fallback {
+  text-align: center;
 }
 
 .domain .domain__vertical-menu, .domain--disabled .domain__vertical-menu {
@@ -203,6 +215,9 @@ body {
   margin: 0;
   font-weight: 500;
   width: 100%;
+  font-size: 13px;
+  margin-top: 10px;
+  color: #333;
 }
 
 .contextmenu-icon {
