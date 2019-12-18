@@ -1,0 +1,7 @@
+@include block('add-link') {
+  @include modifier('incognito') {
+    &:hover {
+      background-color: #a9a9a9;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@include block('domain') {
+  @include modifier('incognito') {
+    &:hover {
+      background-color: #a9a9a9;
+    }
+  }
+}

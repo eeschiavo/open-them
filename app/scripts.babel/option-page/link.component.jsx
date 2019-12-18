@@ -128,7 +128,9 @@ class Link extends React.Component {
 
         <MenuProvider id={this.contextMenuId}>
           <Col
-              className={'domain '+(!this.state.enabled ? 'domain--disabled':'')}
+              className={'domain '+
+                          (!this.state.enabled ? 'domain--disabled':'')+
+                          (link.incognito ? 'domain--incognito':'')}
               onTouchStart={this.handleButtonPress}
               onTouchEnd={this.handleButtonRelease}
               onMouseDown={this.handleButtonPress}
@@ -156,17 +158,18 @@ class Link extends React.Component {
               )
             }
 
-            <p className="domain__name">
+            <p className={'domain__name '+
+               (link.incognito ? 'domain__name--incognito':'')}>
               {
-                this.props.linkObj.name &&
+                link.name &&
                 (
-                  <span>{this.props.linkObj.name}</span>
+                  <span>{link.name}</span>
                 )
               }
               {
-                !this.props.linkObj.name &&
+                !link.name &&
                 (
-                  <span>{this.props.linkObj.domain}</span>
+                  <span>{link.domain}</span>
                 )
               }
             </p>
@@ -176,10 +179,10 @@ class Link extends React.Component {
 
         <LinkModal isEdit={true}
                    ref={this.modalRef}
-                   url={this.props.linkObj.url}
-                   name={this.props.linkObj.name}
-                   incognito={this.props.linkObj.incognito}
-                   enabled={this.props.linkObj.enabled}
+                   url={link.url}
+                   name={link.name}
+                   incognito={link.incognito}
+                   enabled={link.enabled}
                    modalClosed={this.modalClosed} />
 
         <Menu id={this.contextMenuId}>
