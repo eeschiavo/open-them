@@ -38,6 +38,7 @@ class Welcome extends React.Component {
     this.updateLink = this.updateLink.bind(this);
     this.updateSavedLinks = this.updateSavedLinks.bind(this);
     this.modalCloseCallback = this.modalCloseCallback.bind(this);
+    this.almostOneIncognitoLink = this.almostOneIncognitoLink.bind(this);
   }
 
   /**
@@ -130,6 +131,14 @@ class Welcome extends React.Component {
     });
   }
 
+  /**
+   * Verifica la presenza di almeno un link in incognito
+   * @returns {}
+   */
+  almostOneIncognitoLink() {
+    return !!this.state.links.find(link => {return link.incognito = true});
+  }
+
   render() {
     return (
       <Container className="options-page">
@@ -160,6 +169,7 @@ class Welcome extends React.Component {
         </Row>
         {
           this.state.links &&
+          this.almostOneIncognitoLink() &&
           (
             <Row className="options-page__links-row justify-content-md-center">
               <Col md="auto">
