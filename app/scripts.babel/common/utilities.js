@@ -50,7 +50,7 @@ export function IsValidURL(str) {
 export function ExtractHostname(url) {
   var hostname;
 
-  if (url.indexOf("//") > -1) {
+  if (url.indexOf('//') > -1) {
       hostname = url.split('/')[2];
   }
   else {
