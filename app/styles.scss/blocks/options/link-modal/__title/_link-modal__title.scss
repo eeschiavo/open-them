@@ -1,0 +1,8 @@
+@include block('link-modal') {
+ @include element('title') {
+   text-align: center;
+   font-weight: 500;
+   font-size: 18px;
+   color: $color-success;
+ }
+}

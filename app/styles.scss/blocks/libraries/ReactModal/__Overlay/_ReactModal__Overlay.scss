@@ -1,0 +1,5 @@
+@include block('ReactModal') {
+  @include element('Overlay') {
+        background-color: rgba(0, 0, 0, 0.15);
+  }
+}
