@@ -3,6 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import AddLink from "./add-link.component.jsx";
 import Link from './link.component.jsx';
+import { ChromeStorageSyncGet, ChromeStorageSyncSet } from '../common/chrome-storage.api.js';
 
 /**
 * Component principale della pagina options
@@ -20,7 +21,7 @@ class Welcome extends React.Component {
     };
 
     // recupero i links
-    chrome.storage.sync.get(['links'], (result) => {
+    ChromeStorageSyncGet(['links']).then( result => {
 
       log.debug('Welcome - links recuperati dallo storage: ', result);
 
@@ -32,6 +33,7 @@ class Welcome extends React.Component {
 
     });
 
+    this.addLink = this.addLink.bind(this);
     this.removeLink = this.removeLink.bind(this);
     this.updateLink = this.updateLink.bind(this);
     this.updateSavedLinks = this.updateSavedLinks.bind(this);
@@ -46,13 +48,32 @@ class Welcome extends React.Component {
 
     log.info('modalCloseCallback - valore dal modal: ', value);
 
+    // verifico se il link sia già presente
+    const index = this.state.links.findIndex(l => { return l.id == value.id});
+
+    // se il link è già salvato lo aggiorno altrimenti lo aggiungo
+    if(index > 0) {
+      this.updateLink(value, index);
+    } else {
+      this.addLink(value);
+    }
+
+  }
+
+  /**
+   * Aggiunta di un link
+   * @param link
+   */
+  addLink(link) {
+
     // aggiunto il link allo state
     this.setState({
-      links: this.state.links.concat(value)
+      links: this.state.links.concat(link)
     }, () => {
 
-      chrome.storage.sync.set({links: this.state.links}, function() {
-        log.debug('modalCloseCallback - link aggiunto');
+      //salvataggio dei link nello storage di Chrome
+      ChromeStorageSyncSet({links: this.state.links}).then( () => {
+        log.debug('addLink - link aggiunto');
       });
     });
   }
@@ -103,7 +124,7 @@ class Welcome extends React.Component {
       log.debug('updateSavedLinks - link aggiornato nello state');
 
       // salvo le modifiche nello storage
-      chrome.storage.sync.set({links: links}, () => {
+      ChromeStorageSyncSet({links: links}).then( () => {
         log.debug('removeLink - link aggiornato nello storage');
       });
     });
@@ -122,7 +143,8 @@ class Welcome extends React.Component {
                   linkObj={link}
                   index={index}
                   removeLink={this.removeLink}
-                  updateLink={this.updateLink}>
+                  updateLink={this.updateLink}
+                  closeCallback={this.modalCloseCallback}>
                 </Link>
               )
             })
