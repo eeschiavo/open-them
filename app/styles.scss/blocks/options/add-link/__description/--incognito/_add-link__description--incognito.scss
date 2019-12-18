@@ -1,0 +1,7 @@
+@include block('add-link') {
+  @include element('description') {
+    @include modifier('incognito') {
+      color: white;
+    }
+  }
+}

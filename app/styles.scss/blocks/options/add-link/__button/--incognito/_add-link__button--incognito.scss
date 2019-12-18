@@ -1,0 +1,8 @@
+@include block('add-link') {
+  @include element('button') {
+    @include modifier('incognito') {
+      color: white;
+      background: transparent;
+    }
+  }
+}

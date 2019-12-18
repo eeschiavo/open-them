@@ -5,14 +5,13 @@
     padding: 0;
     margin: 0;
     background: none;
-    border: none;
     outline: none;
     width: 60px;
     height: 60px;
-    background-image: url(../images/icons/add-link.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 52px;
+    border: 2px solid;
+    border-radius: 50%;
+    font-size: 19px;
+    line-height: 3.1;
 
     &:hover {
       transform: scale(1.1);

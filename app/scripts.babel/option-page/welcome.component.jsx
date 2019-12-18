@@ -133,24 +133,61 @@ class Welcome extends React.Component {
   render() {
     return (
       <Container className="options-page">
-        <Row className="options-page__links-row">
-          {
-            this.state.links &&
-            this.state.links.map((link, index) => {
-              return (
-                <Link
-                  key={index+''+link.id}
-                  linkObj={link}
-                  index={index}
-                  removeLink={this.removeLink}
-                  updateLink={this.updateLink}
-                  closeCallback={this.modalCloseCallback}>
-                </Link>
-              )
-            })
-          }
-          <AddLink closeCallback={this.modalCloseCallback}/>
+        <Row className="options-page__links-row justify-content-md-center">
+          <Col md="auto">
+            <Row>
+            {
+              this.state.links &&
+              this.state.links.map((link, index) => {
+                if(!link.incognito) {
+                  return (
+                    <Link
+                      key={index+''+link.id}
+                      linkObj={link}
+                      index={index}
+                      removeLink={this.removeLink}
+                      updateLink={this.updateLink}
+                      closeCallback={this.modalCloseCallback}>
+                    </Link>
+                  )
+                }
+              })
+            }
+            <AddLink incognito={false}
+                     closeCallback={this.modalCloseCallback}/>
+            </Row>
+          </Col>
         </Row>
+        {
+          this.state.links &&
+          (
+            <Row className="options-page__links-row justify-content-md-center">
+              <Col md="auto">
+                <Row className="options-page__links-row--incognito">
+                  {
+                    this.state.links.map((link, index) => {
+                      if(link.incognito) {
+                        return (
+                          <Link
+                            key={index + '' + link.id}
+                            linkObj={link}
+                            index={index}
+                            removeLink={this.removeLink}
+                            updateLink={this.updateLink}
+                            closeCallback={this.modalCloseCallback}>
+                          </Link>
+                        )
+                      }
+                    })
+                  }
+                  <AddLink incognito={true}
+                           closeCallback={this.modalCloseCallback} />
+                </Row>
+              </Col>
+            </Row>
+
+          )
+        }
       </Container>
     )
   }
