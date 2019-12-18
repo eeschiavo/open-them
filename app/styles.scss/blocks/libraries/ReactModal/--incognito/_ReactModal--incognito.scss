@@ -1,0 +1,21 @@
+@include block('ReactModal') {
+  @include modifier('incognito') {
+    background-color: #1b1e21;
+
+    .input-effect {
+      .has-content ~ label, .input-effect__move-and-color:focus ~ label {
+        color: white;
+      }
+    }
+
+    .link-modal__incognito {
+      p {
+        color: white;
+      }
+    }
+
+    .ot-button--cancel {
+      border: none;
+    }
+  }
+}

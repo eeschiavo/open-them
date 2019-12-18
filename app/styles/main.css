@@ -301,10 +301,38 @@ input.input-effect__move-and-color[type="text"] {
   border-radius: 8px !important;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px, #f0f0f0 0px 0px 0px 1px;
   border: none !important;
+  top: 40% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin-right: -50%;
+  width: 60%;
+  max-width: 450px;
+  transform: translate(-50%, -50%);
+  outline: none;
+  padding: 20px;
+  overflow: auto;
+  position: absolute;
 }
 
 .ReactModal__Overlay {
   background-color: rgba(0, 0, 0, 0.15);
+}
+
+.ReactModal--incognito {
+  background-color: #1b1e21;
+}
+
+.ReactModal--incognito .input-effect .has-content ~ label, .ReactModal--incognito .input-effect .input-effect__move-and-color:focus ~ label {
+  color: white;
+}
+
+.ReactModal--incognito .link-modal__incognito p {
+  color: white;
+}
+
+.ReactModal--incognito .ot-button--cancel {
+  border: none;
 }
 
 .options-page {

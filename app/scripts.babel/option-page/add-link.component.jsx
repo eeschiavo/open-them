@@ -63,7 +63,8 @@ class AddLink extends React.Component {
           Aggiungi
         </p>
 
-        <LinkModal modalClosed={this.modalClosed}
+        <LinkModal key={this.props.incognito ? '1' : '0'}
+                   modalClosed={this.modalClosed}
                    ref={this.modalRef}
                    incognito={this.props.incognito}
                    enabled={true}

@@ -1,8 +1,20 @@
 @include block('ReactModal') {
   @include element('Content') {
-      border-radius: 8px !important;
-      box-shadow: rgba(0, 0, 0, 0.20) 0px 10px 20px,
-                  rgb(240, 240, 240) 0px 0px 0px 1px;
-      border: none !important;
+    border-radius: 8px !important;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 10px 20px,
+                rgb(240, 240, 240) 0px 0px 0px 1px;
+    border: none !important;
+    top: 40% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-right: -50%;
+    width: 60%;
+    max-width: 450px;
+    transform: translate(-50%, -50%);
+    outline: none;
+    padding: 20px;
+    overflow: auto;
+    position: absolute;
   }
 }
