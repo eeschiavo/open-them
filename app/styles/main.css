@@ -338,13 +338,25 @@ input.input-effect__move-and-color[type="text"] {
 .options-page {
   width: 100%;
   height: 100%;
+  max-width: 1000px;
+}
+
+.options-page .options-page__links-row, .options-page .options-page__links-row--incognito {
+  margin: 30px;
+  margin-bottom: 0;
+}
+
+.options-page .options-page__links-row .counter-badge-col, .options-page .options-page__links-row--incognito .counter-badge-col {
+  width: auto !important;
 }
 
 .options-page__links-row--incognito {
-  background-color: #1b1e21;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
+  background-color: #1b1e21;
+  width: auto !important;
+  margin-top: 20px !important;
 }
 
 .add-link, .add-link--incognito {
@@ -503,6 +515,35 @@ input.input-effect__move-and-color[type="text"] {
 
 .link-modal__buttons button:first-child {
   margin-right: 10px;
+}
+
+.counter-badge, .counter-badge--incognito {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  width: auto;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  background-color: #3390FF;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.counter-badge span:nth-child(2), .counter-badge--incognito span:nth-child(2) {
+  margin: -1px 2px 0;
+}
+
+.counter-badge--incognito {
+  background-color: white;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .popup-body {

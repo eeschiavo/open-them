@@ -6,8 +6,9 @@ import LinkModal from './link-modal.component.jsx';
 
 
 /**
- * Component per l'aggiunta di un link
+ * Aggiunta di un link
  * @author Ernesto Schiavo - schiavo.ernesto@gmail.com
+ * @extends React.Component
  */
 class AddLink extends React.Component {
 
@@ -26,7 +27,6 @@ class AddLink extends React.Component {
 
   /**
    * Apertura del modal per creare il link
-   * @return {[type]} [description]
    */
   openModal() {
     this.modalRef.current.openModal();
@@ -35,18 +35,17 @@ class AddLink extends React.Component {
   /**
    * Chiusura del modal per le informazioni riguardanti il link
    */
-  modalClosed(value) {
+  modalClosed(linkData) {
     log.info('AddLink - modalClosed');
 
-    log.debug('AddLink - modalClosed - value: ', value);
-    if(value) {
-      this.props.closeCallback(value);
+    log.debug('AddLink - modalClosed - linkData: ', linkData);
+    if(linkData) {
+      this.props.closeCallback(linkData);
     }
   }
 
   /**
    * Render
-   * @returns {*}
    */
   render() {
 
