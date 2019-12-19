@@ -8,6 +8,11 @@ import Spinner from '../common/spinner.component.jsx';
 import LinkModal from './link-modal.component.jsx';
 import { URL_BESTICON } from '../common/properties.js';
 
+/**
+ * Rappresentazione di un link
+ * @author Ernesto Schiavo - schiavo.ernesto@gmail.com
+ * @extends React.Component
+ */
 class Link extends React.Component {
 
   constructor(props) {
@@ -31,7 +36,7 @@ class Link extends React.Component {
     log.debug('Link - constructor - dominio: ', domain);
 
     this.domainIcon = URL_BESTICON.replace('%domain%', domain);
-    
+
     this.contextMenuId = 'vertical-menu-'+RandomInt();
 
     this.removeLink = this.removeLink.bind(this);

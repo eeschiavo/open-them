@@ -6,8 +6,9 @@ import LinkModal from './link-modal.component.jsx';
 
 
 /**
- * Component per l'aggiunta di un link
+ * Aggiunta di un link
  * @author Ernesto Schiavo - schiavo.ernesto@gmail.com
+ * @extends React.Component
  */
 class AddLink extends React.Component {
 

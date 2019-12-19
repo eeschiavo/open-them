@@ -8,18 +8,11 @@ import LinkData from '../models/link-data.model.js'
 
 ReactModal.setAppElement('#options-root');
 
-const customStyles = {
-  content : {
-    top                   : '40%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    width                 : '450px',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
+/**
+ * Modal per l'inserimento e la modifica dei link
+ * @author Ernesto Schiavo - schiavo.ernesto@gmail.com
+ * @extends React.Component
+ */
 class LinkModal extends React.Component {
 
   constructor(props) {
