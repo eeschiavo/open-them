@@ -180,7 +180,7 @@ class LinksPage extends React.Component {
 
   render() {
     return (
-      <Container className="options-page">
+      <Container className="options-page__container">
         <Row className="options-page__links-row justify-content-md-center">
           <Col md="auto">
             {
@@ -246,7 +246,7 @@ class LinksPage extends React.Component {
                 </Row>
                 <Row className="justify-content-center">
                   <Col md="auto">
-                    <Row className="justify-content-center" style={{margin:'20px'}}>
+                    <Row className="justify-content-center" style={{margin:'20px 20px 0'}}>
                       {
                         this.state.links.map((link, index) => {
                           if(link.incognito) {
