@@ -206,7 +206,8 @@ class LinkModal extends React.Component {
           {/* TASTI */}
           <Row>
             <Col className="link-modal__buttons">
-              <button className="ot-button ot-button--cancel"
+              <button type="button"
+                      className="ot-button ot-button--cancel"
                       onClick={this.closeModal}>
                 Annulla
               </button>
