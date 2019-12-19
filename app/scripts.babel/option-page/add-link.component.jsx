@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
-import ReactModal from 'react-modal';
+import { Localize } from '../common/localization.js';
 import LinkModal from './link-modal.component.jsx';
 
 
@@ -59,7 +59,7 @@ class AddLink extends React.Component {
 
         <p className={'add-link__description '+
            (this.props.incognito ? 'add-link__description--incognito' : '')}>
-          Aggiungi
+          {Localize('ADD')}
         </p>
 
         <LinkModal key={this.props.incognito ? '1' : '0'}

@@ -4,7 +4,8 @@ import * as log from 'loglevel';
 import ReactModal from 'react-modal';
 import psl from 'psl';
 import { UuidV4, IsValidURL, ExtractHostname } from '../common/utilities.js';
-import LinkData from '../models/link-data.model.js'
+import LinkData from '../models/link-data.model.js';
+import { Localize } from '../common/localization.js';
 
 ReactModal.setAppElement('#options-root');
 

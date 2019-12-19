@@ -1,0 +1,31 @@
+{
+  "appName": {
+    "message": "OpenThem",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Open links with ease",
+    "description": "The description of the application"
+  },
+  "ADD": {
+    "message": "Aggiungi",
+    "description": ""
+  },
+  "EDIT": {
+    "message": "Modifica",
+    "description": ""
+  },
+  "DISABLE": {
+    "message": "Disabilita",
+    "description": ""
+  },
+  "ENABLE": {
+    "message": "Abilita",
+    "description": ""
+  },
+  "REMOVE": {
+    "message": "Rimuovi",
+    "description": ""
+  }
+
+}
