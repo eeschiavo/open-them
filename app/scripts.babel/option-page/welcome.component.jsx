@@ -4,6 +4,7 @@ import * as log from 'loglevel';
 import AddLink from "./add-link.component.jsx";
 import Link from './link.component.jsx';
 import { ChromeStorageSyncGet, ChromeStorageSyncSet } from '../common/chrome-storage.api.js';
+import { MAX_VISIBLE_ITEMS, MAX_INCOGNITO_ITEMS } from '../common/properties.js'
 
 /**
 * Component principale della pagina options
@@ -34,6 +35,7 @@ class Welcome extends React.Component {
     });
 
     this.addLink = this.addLink.bind(this);
+    this.countLinks = this.countLinks.bind(this);
     this.removeLink = this.removeLink.bind(this);
     this.updateLink = this.updateLink.bind(this);
     this.updateSavedLinks = this.updateSavedLinks.bind(this);
@@ -137,7 +139,8 @@ class Welcome extends React.Component {
    * @returns {}
    */
   almostOneIncognitoLink() {
-    return !!this.state.links.find(link => {return link.incognito == true});
+    return this.state.links
+           && !!this.state.links.find(link => {return link.incognito == true});
   }
 
   /**
@@ -145,7 +148,33 @@ class Welcome extends React.Component {
    * @returns {}
    */
   almostOneVisibleLink() {
-    return this.state.links.find(link => {return !link.incognito});
+    return this.state.links
+           && this.state.links.find(link => {return !link.incognito});
+  }
+
+  /**
+   * Conta il numero di link (in incognito e non)
+   * @param  {boolean} onlyIncognito se contare solo quelli in incognito
+   * @return {number}               il numero di link
+   */
+  countLinks(onlyIncognito) {
+
+    let counter = 0;
+    log.debug('countLinks - onlyIncognito: ', onlyIncognito);
+
+    if(this.state.links) {
+
+      this.state.links.forEach(link => {
+        if(onlyIncognito) {
+          counter = link.incognito ? counter+1 : counter;
+        } else {
+          counter = link.incognito ? counter : counter+1;
+        }
+        log.debug('countLinks - counter: ', counter);
+      });
+    }
+
+    return counter;
   }
 
   render() {
@@ -153,59 +182,93 @@ class Welcome extends React.Component {
       <Container className="options-page">
         <Row className="options-page__links-row justify-content-md-center">
           <Col md="auto">
-            <Row>
             {
-              this.state.links &&
               this.almostOneVisibleLink() &&
-              this.state.links.map((link, index) => {
-                if(!link.incognito) {
-                  return (
-                    <Link
-                      key={index+''+link.id}
-                      linkObj={link}
-                      index={index}
-                      removeLink={this.removeLink}
-                      updateLink={this.updateLink}
-                      closeCallback={this.modalCloseCallback}>
-                    </Link>
-                  )
-                }
-              })
+              (
+                <Row className="justify-content-center">
+                  <Col md="auto" className="counter-badge-col">
+                    <div title="Numero di link salvati rispetto al totale possibile"
+                         className="counter-badge">
+                      <span>
+                        {
+                            this.countLinks()
+                        }
+                      </span>
+                      <span>/</span>
+                      <span>{MAX_VISIBLE_ITEMS}</span>
+                    </div>
+                  </Col>
+                </Row>
+              )
             }
-            <AddLink incognito={false}
+            <Row className="justify-content-center">
+              {
+                this.almostOneVisibleLink() &&
+                this.state.links.map((link, index) => {
+                  if(!link.incognito) {
+                    return (
+                      <Link
+                        key={index+''+link.id}
+                        linkObj={link}
+                        index={index}
+                        removeLink={this.removeLink}
+                        updateLink={this.updateLink}
+                        closeCallback={this.modalCloseCallback}>
+                      </Link>
+                    )
+                  }
+                })
+              }
+              <AddLink incognito={false}
                      closeCallback={this.modalCloseCallback}/>
             </Row>
           </Col>
         </Row>
         {
-          this.state.links &&
           this.almostOneIncognitoLink() &&
           (
-            <Row className="options-page__links-row justify-content-md-center">
-              <Col md="auto">
-                <Row className="options-page__links-row--incognito">
-                  {
-                    this.state.links.map((link, index) => {
-                      if(link.incognito) {
-                        return (
-                          <Link
-                            key={index + '' + link.id}
-                            linkObj={link}
-                            index={index}
-                            removeLink={this.removeLink}
-                            updateLink={this.updateLink}
-                            closeCallback={this.modalCloseCallback}>
-                          </Link>
-                        )
+            <Row className="justify-content-md-center ">
+              <Col md="auto options-page__links-row--incognito">
+                <Row className="justify-content-center">
+                  <Col md="auto" className="counter-badge-col">
+                    <div title="Numero di link in incognito salvati rispetto al totale possibile"
+                         className="counter-badge counter-badge--incognito">
+                      <span>
+                        {
+                            this.countLinks(true)
+                        }
+                      </span>
+                      <span>/</span>
+                      <span>{MAX_INCOGNITO_ITEMS}</span>
+                    </div>
+                  </Col>
+                </Row>
+                <Row className="options-page__links-row justify-content-md-center">
+                  <Col md="auto">
+                    <Row className="justify-content-center">
+                      {
+                        this.state.links.map((link, index) => {
+                          if(link.incognito) {
+                            return (
+                              <Link
+                                key={index + '' + link.id}
+                                linkObj={link}
+                                index={index}
+                                removeLink={this.removeLink}
+                                updateLink={this.updateLink}
+                                closeCallback={this.modalCloseCallback}>
+                              </Link>
+                            )
+                          }
+                        })
                       }
-                    })
-                  }
-                  <AddLink incognito={true}
-                           closeCallback={this.modalCloseCallback} />
+                      <AddLink incognito={true}
+                               closeCallback={this.modalCloseCallback} />
+                    </Row>
+                  </Col>
                 </Row>
               </Col>
             </Row>
-
           )
         }
       </Container>
