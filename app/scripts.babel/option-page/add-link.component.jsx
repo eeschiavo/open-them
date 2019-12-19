@@ -26,7 +26,6 @@ class AddLink extends React.Component {
 
   /**
    * Apertura del modal per creare il link
-   * @return {[type]} [description]
    */
   openModal() {
     this.modalRef.current.openModal();
@@ -46,7 +45,6 @@ class AddLink extends React.Component {
 
   /**
    * Render
-   * @returns {*}
    */
   render() {
 
