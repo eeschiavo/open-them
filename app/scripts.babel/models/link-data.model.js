@@ -1,6 +1,8 @@
 'use strict';
 
-/** @type {LinkData} Classe per la rappresenzaione dei dati di un link */
+/**
+ * Classe per la rappresenzaione dei dati di un link
+ */
 class LinkData {
   constructor(id, url, domain, incognito, enabled, name) {
     this.id = id;

@@ -342,7 +342,8 @@ input.input-effect__move-and-color[type="text"] {
 }
 
 .options-page .options-page__links-row, .options-page .options-page__links-row--incognito {
-  margin: 20px;
+  margin: 30px;
+  margin-bottom: 0;
 }
 
 .options-page .options-page__links-row .counter-badge-col, .options-page .options-page__links-row--incognito .counter-badge-col {
@@ -355,6 +356,7 @@ input.input-effect__move-and-color[type="text"] {
   border-radius: 8px;
   background-color: #1b1e21;
   width: auto !important;
+  margin-top: 20px !important;
 }
 
 .add-link, .add-link--incognito {
