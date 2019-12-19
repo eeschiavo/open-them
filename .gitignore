@@ -9,3 +9,4 @@ package
 app/scripts
 .idea/
 package-lock.json
+app/styles/main.css
