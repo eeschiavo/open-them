@@ -6,7 +6,13 @@ import { RandomInt } from '../common/utilities.js';
 import { Menu, Item, Separator, IconFont, Submenu, MenuProvider } from 'react-contexify';
 import Spinner from '../common/spinner.component.jsx';
 import LinkModal from './link-modal.component.jsx';
+import { URL_BESTICON } from '../common/properties.js';
 
+/**
+ * Rappresentazione di un link
+ * @author Ernesto Schiavo - schiavo.ernesto@gmail.com
+ * @extends React.Component
+ */
 class Link extends React.Component {
 
   constructor(props) {
@@ -29,7 +35,8 @@ class Link extends React.Component {
     const domain = this.props.linkObj.domain;
     log.debug('Link - constructor - dominio: ', domain);
 
-    this.domainIcon = 'https://otbesticon.herokuapp.com/icon?url='+domain+'&size=80..120..200';
+    this.domainIcon = URL_BESTICON.replace('%domain%', domain);
+
     this.contextMenuId = 'vertical-menu-'+RandomInt();
 
     this.removeLink = this.removeLink.bind(this);
@@ -66,13 +73,13 @@ class Link extends React.Component {
 
   /**
    * Salvataggio del link dopo la chiusura del modal
-   * @param value eventuale dati del link
+   * @param linkData eventuale dati del link
    */
-  modalClosed(value) {
+  modalClosed(linkData) {
 
     // se è presente un oggetto ovvero un nuovo link lo salvo
-    if(value) {
-      this.props.closeCallback(value);
+    if(linkData) {
+      this.props.closeCallback(linkData);
     }
   }
 

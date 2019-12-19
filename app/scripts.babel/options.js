@@ -1,10 +1,10 @@
 'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Welcome from './option-page/welcome.component.jsx';
+import LinksPage from './option-page/links-page.component.jsx';
 import * as log from 'loglevel';
 
 ReactDOM.render(
-  <Welcome />,
+  <LinksPage />,
   document.getElementById('options-root')
 );
