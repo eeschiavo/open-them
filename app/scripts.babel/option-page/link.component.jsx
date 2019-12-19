@@ -7,6 +7,7 @@ import { Menu, Item, Separator, IconFont, Submenu, MenuProvider } from 'react-co
 import Spinner from '../common/spinner.component.jsx';
 import LinkModal from './link-modal.component.jsx';
 import { URL_BESTICON } from '../common/properties.js';
+import { Localize } from '../common/localization.js';
 
 /**
  * Rappresentazione di un link
@@ -195,7 +196,7 @@ class Link extends React.Component {
         <Menu id={this.contextMenuId}>
           <Item onClick={this.editLink}>
             <IconFont className="fas fa-edit contentmenu-icon" />
-            Edit
+            {Localize('EDIT')}
           </Item>
           <Separator />
           {
@@ -203,7 +204,7 @@ class Link extends React.Component {
             (
               <Item onClick={this.disableLink}>
                 <IconFont className="fas fa-minus-square contentmenu-icon" />
-                Disabilita
+                {Localize('DISABLE')}
               </Item>
             )
           }
@@ -212,13 +213,13 @@ class Link extends React.Component {
             (
               <Item onClick={this.enableLink}>
                 <IconFont className="fas fa-plus-square contentmenu-icon" />
-                Abilita
+                {Localize('ENABLE')}
               </Item>
             )
           }
           <Item onClick={this.removeLink}>
             <IconFont className="fas fa-trash contentmenu-icon" />
-            Rimuovi
+            {Localize('REMOVE')}
           </Item>
       </Menu>
       </React.Fragment>
