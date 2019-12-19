@@ -20,15 +20,15 @@ export function ChromeStorageSyncGet(key) {
 
 /**
  * Richiama chrome.storage.sync.set per salvare online l'oggetto passato
- * @param value l'oggetto da salvare
+ * @param linkData l'oggetto da salvare
  * @returns {Promise<any>}
  */
-export function ChromeStorageSyncSet(value) {
+export function ChromeStorageSyncSet(linkData) {
 
   log.info('ChromeStorageSyncSet - method called');
 
   return new Promise(resolve => {
-    chrome.storage.sync.set(value, () => {
+    chrome.storage.sync.set(linkData, () => {
       resolve();
     });
   })
