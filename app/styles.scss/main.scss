@@ -1,8 +1,3 @@
-$padding: 20px;
-body {
-  padding: $padding;
-}
-
 @import
 'utilities/constants',
 'utilities/mixins',
@@ -17,8 +12,10 @@ body {
 'blocks/libraries/ReactModal/__Content/ReactModal__Content',
 'blocks/libraries/ReactModal/__Overlay/ReactModal__Overlay',
 'blocks/libraries/ReactModal/--incognito/ReactModal--incognito',
+'blocks/options/body/body',
 'blocks/options/options-page/options-page',
 'blocks/options/options-page/__links-row/options-page__links-row',
+'blocks/options/options-page/__container/options-page__container',
 'blocks/options/options-page/__links-row/--incognito/options-page__links-row--incognito',
 'blocks/options/add-link/add-link',
 'blocks/options/add-link/--incognito/add-link--incognito',
@@ -39,4 +36,5 @@ body {
 'blocks/options/link-modal/__buttons/link-modal__buttons',
 'blocks/options/counter-badge/counter-badge',
 'blocks/options/counter-badge/--incognito/counter-badge--incognito',
+'blocks/options/sidebar/sidebar',
 'popup';

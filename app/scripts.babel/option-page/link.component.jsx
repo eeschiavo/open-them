@@ -136,7 +136,7 @@ class Link extends React.Component {
         <MenuProvider id={this.contextMenuId}>
           <Col
               className={'domain '+
-                          (!this.state.enabled ? 'domain--disabled':'')+
+                          (!this.state.enabled ? 'domain--disabled ':'')+
                           (link.incognito ? 'domain--incognito':'')}
               onTouchStart={this.handleButtonPress}
               onTouchEnd={this.handleButtonRelease}

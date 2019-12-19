@@ -1,0 +1,8 @@
+@include block('options-page') {
+  @include element('links-row') {
+      width: 100%;
+      height: 100%;
+      max-width: 1000px;
+      padding: 20px;
+  }
+}
