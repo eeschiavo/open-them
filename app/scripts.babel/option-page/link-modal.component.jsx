@@ -28,7 +28,7 @@ class LinkModal extends React.Component {
     this.initialState = {
       url: this.props.url ? this.props.url : '',
       name: this.props.name ? this.props.name : '',
-      incognito: this.props.incognito ? this.props.incognito : false,
+      incognito: !!this.props.incognito,
       linkData: {},
       showModal: this.props.showModal,
       enabled: this.props.enabled,
@@ -70,6 +70,9 @@ class LinkModal extends React.Component {
    * @param event event del campo di input (type checkbox)
    */
   toggleChange(event) {
+
+    log.info('LinkModal - toggleChange');
+
     this.setState({
       incognito: !this.state.incognito
     });
@@ -90,16 +93,14 @@ class LinkModal extends React.Component {
     if(!url || !IsValidURL(url)) {
 
       alert('Inserire un indirizzo valido');
-
     } else if(!this.state.name) {
 
       alert('Inserire un nome');
-
     } else {
 
       const id = this.state.linkData && this.state.linkData.id ? this.state.linkData.id : UuidV4();
 
-      const value = new LinkData(
+      const linkData = new LinkData(
         id,
         url,
         psl.get(ExtractHostname(url)),
@@ -108,7 +109,9 @@ class LinkModal extends React.Component {
         this.state.name,
       );
 
-      await this.closeModal(null, value);
+      log.debug('LinkModal - LinkData creato: ', linkData);
+
+      await this.closeModal(null, linkData);
 
     }
   }
@@ -130,12 +133,12 @@ class LinkModal extends React.Component {
   /**
    * Chiusura del modal per le informazioni riguardanti il link
    */
-  closeModal(event, value) {
+  closeModal(event, linkData) {
 
     log.info('AddLink - closeModal');
 
     this.setState({showModal: false}, () => {
-      this.props.modalClosed(value);
+      this.props.modalClosed(linkData);
       this.setState(this.initialState);
     });
 

@@ -66,13 +66,13 @@ class Link extends React.Component {
 
   /**
    * Salvataggio del link dopo la chiusura del modal
-   * @param value eventuale dati del link
+   * @param linkData eventuale dati del link
    */
-  modalClosed(value) {
+  modalClosed(linkData) {
 
     // se è presente un oggetto ovvero un nuovo link lo salvo
-    if(value) {
-      this.props.closeCallback(value);
+    if(linkData) {
+      this.props.closeCallback(linkData);
     }
   }
 

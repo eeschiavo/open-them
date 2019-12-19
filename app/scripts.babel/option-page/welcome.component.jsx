@@ -39,24 +39,25 @@ class Welcome extends React.Component {
     this.updateSavedLinks = this.updateSavedLinks.bind(this);
     this.modalCloseCallback = this.modalCloseCallback.bind(this);
     this.almostOneIncognitoLink = this.almostOneIncognitoLink.bind(this);
+    this.almostOneVisibleLink = this.almostOneVisibleLink.bind(this);
   }
 
   /**
    * Callback richiamata alla chiusura del modal del component AddLink
-   * @param value quanto inserito nel modal (link e incognito)
+   * @param linkData quanto inserito nel modal (link e incognito)
    */
-  modalCloseCallback(value) {
+  modalCloseCallback(linkData) {
 
-    log.info('modalCloseCallback - valore dal modal: ', value);
+    log.info('modalCloseCallback - valore dal modal: ', linkData);
 
     // verifico se il link sia già presente
-    const index = this.state.links.findIndex(l => { return l.id == value.id});
+    const index = this.state.links.findIndex(l => { return l.id == linkData.id});
 
     // se il link è già salvato lo aggiorno altrimenti lo aggiungo
     if(index > 0) {
-      this.updateLink(value, index);
+      this.updateLink(linkData, index);
     } else {
-      this.addLink(value);
+      this.addLink(linkData);
     }
 
   }
@@ -136,7 +137,15 @@ class Welcome extends React.Component {
    * @returns {}
    */
   almostOneIncognitoLink() {
-    return !!this.state.links.find(link => {return link.incognito = true});
+    return !!this.state.links.find(link => {return link.incognito == true});
+  }
+
+  /**
+   * Verifica la presenza di almeno un link non in incognito
+   * @returns {}
+   */
+  almostOneVisibleLink() {
+    return this.state.links.find(link => {return !link.incognito});
   }
 
   render() {
@@ -147,6 +156,7 @@ class Welcome extends React.Component {
             <Row>
             {
               this.state.links &&
+              this.almostOneVisibleLink() &&
               this.state.links.map((link, index) => {
                 if(!link.incognito) {
                   return (
