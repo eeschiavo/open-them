@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
                className={'sidebar__item '+
                           (this.state.itemSelected == 1 ? 'sidebar__item--selected':'')}
                style={{marginTop:'50px'}}>
-              <i class="fas fa-link"></i>
+              <i className="fas fa-link"></i>
               <span>
                 {Localize('MENU_ITEM_WEBSITE')}
               </span>
@@ -54,7 +54,7 @@ class Sidebar extends React.Component {
               <p onClick={() => this.selectItem(2)}
                  className={'sidebar__item '+
                             (this.state.itemSelected == 2 ? 'sidebar__item--selected':'')}>
-                <i class="fas fa-cogs"></i>
+                <i className="fas fa-cogs"></i>
                 <span>
                   {Localize('MENU_ITEM_SETTINGS')}
                 </span>
