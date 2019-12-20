@@ -1,0 +1,8 @@
+@include block('disclaimer') {
+  @include element('paragraph-icon') {
+    width: 32px;
+    display: inline;
+    margin-left: -40px;
+    margin-right: 8px;
+  }
+}

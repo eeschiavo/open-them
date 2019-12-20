@@ -5,6 +5,7 @@ import AddLink from "./add-link.component.jsx";
 import Link from './link.component.jsx';
 import { ChromeStorageSyncGet, ChromeStorageSyncSet } from '../common/chrome-storage.api.js';
 import { MAX_VISIBLE_ITEMS, MAX_INCOGNITO_ITEMS } from '../common/properties.js'
+import Disclaimer from '../common/disclaimer.component.jsx';
 
 /**
 * Component per la gestione dei link
@@ -19,8 +20,23 @@ class LinksPage extends React.Component {
     log.info('Welcome - constructor');
 
     this.state = {
-      links: []
+      links: [],
+      showDisclaimer: false
     };
+
+    this.disclaimerRef = React.createRef();
+    this.addLinkRef = React.createRef();
+
+    this.disclaimerParagraphs = [
+      {
+        key: 'WELCOME_DISCLAIMER_FIRST',
+        icon: ''
+      },
+      {
+        key: 'WELCOME_DISCLAIMER_SECOND',
+        icon: 'lightbulb.png'
+      }
+    ];
 
     // recupero i links
     ChromeStorageSyncGet(['links']).then( result => {
@@ -28,9 +44,19 @@ class LinksPage extends React.Component {
       log.debug('Welcome - links recuperati dallo storage: ', result);
 
       if(result.links) {
-        this.setState({links: result.links});
+
+        const showDisclaimer = result.links.length == 0;
+        if(showDisclaimer) {
+          this.addLinkRef.current.extended(true);
+          this.disclaimerRef.current.showDisclaimer();
+        }
+
+        this.setState({links: result.links, showDisclaimer: showDisclaimer});
       } else {
-        this.setState({links: []});
+
+        this.addLinkRef.current.extended(true);
+        this.disclaimerRef.current.showDisclaimer();
+        this.setState({links: [], showDisclaimer: true});
       }
 
     });
@@ -181,6 +207,14 @@ class LinksPage extends React.Component {
   render() {
     return (
       <Container className="options-page__container">
+        {
+
+        }
+        <Disclaimer ref={this.disclaimerRef}
+                    icon={'welcome.png'}
+                    title={'WELCOME_TITLE'}
+                    paragraphs={this.disclaimerParagraphs}
+         />
         <Row className="options-page__links-row justify-content-md-center">
           <Col md="auto">
             {
@@ -220,8 +254,10 @@ class LinksPage extends React.Component {
                   }
                 })
               }
-              <AddLink incognito={false}
-                     closeCallback={this.modalCloseCallback}/>
+              <AddLink  disclaimerRef={this.disclaimerRef}
+                        ref={this.addLinkRef}
+                        incognito={false}
+                        closeCallback={this.modalCloseCallback}/>
             </Row>
           </Col>
         </Row>
