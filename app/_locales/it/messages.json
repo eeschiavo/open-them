@@ -74,5 +74,21 @@
   "MENU_ITEM_SETTINGS": {
     "message": "Impostazioni",
     "description": ""
+  },
+  "END": {
+    "message": "Fine",
+    "description": ""
+  },
+  "BUTTON_ENABLE_ALL_LINKS": {
+    "message": "Abilita tutti i siti web per l'avvio automatico",
+    "description": ""
+  },
+  "BUTTON_DISABLE_ALL_LINKS": {
+    "message": "Disabilita tutti i siti web per l'avvio automatico",
+    "description": ""
+  },
+  "BUTTON_REMOVE_ALL_LINKS": {
+    "message": "Rimuove tutti i siti web",
+    "description": ""
   }
 }

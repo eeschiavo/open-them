@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import axios from 'axios';
-import { RandomInt } from '../common/utilities.js';
+import { RandomInt, OpenLink } from '../common/utilities.js';
 import { Menu, Item, Separator, IconFont, Submenu, MenuProvider } from 'react-contexify';
 import Spinner from '../common/spinner.component.jsx';
 import LinkModal from './link-modal.component.jsx';
@@ -28,7 +28,9 @@ class Link extends React.Component {
         this.props.linkObj.domain.charAt(0)),
       enabled: this.props.linkObj.enabled,
       iconRetrieved: false,
-      useIconFallback: false
+      useIconFallback: false,
+      editMode: false,
+      checked: false
     };
 
     this.modalRef = React.createRef();
@@ -40,13 +42,37 @@ class Link extends React.Component {
 
     this.contextMenuId = 'vertical-menu-'+RandomInt();
 
+    this.enterEditMode = this.enterEditMode.bind(this);
     this.removeLink = this.removeLink.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleButtonRelease = this.handleButtonRelease.bind(this);
     this.disableLink = this.disableLink.bind(this);
     this.enableLink = this.enableLink.bind(this);
     this.editLink = this.editLink.bind(this);
+    this.openLink = this.openLink.bind(this);
+    this.toggleChange = this.toggleChange.bind(this);
     this.modalClosed = this.modalClosed.bind(this);
+  }
+
+  /**
+   * Abilitazione della modalità di modifica
+   * @param  {[type]} enter [description]
+   * @return {[type]}       [description]
+   */
+  enterEditMode(enter) {
+    log.debug('Link - enterEditMode, enter: ', enter);
+    this.setState({editMode:enter}, () => {
+      log.debug('Link - enterEditMode, this.state: ', this.state);
+    });
+  }
+
+  /**
+   * Check dell'elemento per la modifica multipla
+   */
+  toggleChange() {
+    this.setState({checked: !this.state.checked}, () => {
+      this.props.checkLink(this.props.linkObj, this.state.checked);
+    });
   }
 
   /**
@@ -89,14 +115,14 @@ class Link extends React.Component {
    */
   handleButtonPress () {
     this.buttonPressTimer = setTimeout(() => {
-      alert('long press activated')
+      this.props.enterEditModeFromLeaf();
     }, 1500);
   }
 
   /**
    * Cancellazione del long press
    */
-  handleButtonRelease () {
+  handleButtonRelease() {
     clearTimeout(this.buttonPressTimer);
   }
 
@@ -127,23 +153,42 @@ class Link extends React.Component {
     });
   }
 
+  openLink() {
+    if(!this.state.editMode) {
+      OpenLink(this.props.linkObj);
+    } else {
+      this.toggleChange();
+    }
+  }
+
   render() {
 
     let link = this.props.linkObj;
 
     return (
       <React.Fragment>
-
         <MenuProvider id={this.contextMenuId}>
           <Col
-              className={'domain '+
-                          (!this.state.enabled ? 'domain--disabled ':'')+
-                          (link.incognito ? 'domain--incognito':'')}
+              className={'domain'+
+                          (!this.state.enabled ? ' domain--disabled':'')+
+                          (link.incognito ? ' domain--incognito':'')+
+                          (this.state.editMode ? ' domain--edit-mode':'')}
               onTouchStart={this.handleButtonPress}
               onTouchEnd={this.handleButtonRelease}
               onMouseDown={this.handleButtonPress}
               onMouseUp={this.handleButtonRelease}
-              onMouseLeave={this.handleButtonRelease}>
+              onMouseLeave={this.handleButtonRelease}
+              onClick={this.openLink}>
+              {
+                this.state.editMode &&
+                (
+                  <input
+                          className="domain__checkbox"
+                          type="checkbox"
+                          checked={this.state.checked}
+                          onChange={this.toggleChange} />
+                )
+              }
             {
               this.state.iconRetrieved &&
               (
