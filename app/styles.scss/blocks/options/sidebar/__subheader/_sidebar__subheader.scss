@@ -1,0 +1,5 @@
+@include block('sidebar') {
+  @include element('subheader') {
+    padding-left: 4px;
+  }
+}
