@@ -19,10 +19,19 @@ class AddLink extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      extended: false
+    }
+
     this.modalRef = React.createRef();
 
+    this.extended = this.extended.bind(this);
     this.openModal = this.openModal.bind(this);
     this.modalClosed = this.modalClosed.bind(this);
+  }
+
+  extended(extend) {
+    this.setState({extended: extend});
   }
 
   /**
@@ -41,6 +50,11 @@ class AddLink extends React.Component {
     log.debug('AddLink - modalClosed - linkData: ', linkData);
     if(linkData) {
       this.props.closeCallback(linkData);
+
+      if(this.state.extended) {
+        this.props.disclaimerRef.current.closeDisclaimer();
+        this.setState({extended: false});
+      }
     }
   }
 
@@ -50,7 +64,8 @@ class AddLink extends React.Component {
   render() {
 
     return (
-      <Col className={'add-link '+(this.props.incognito ? 'add-link--incognito':'')}>
+      <Col className={'add-link '+(this.props.incognito ? 'add-link--incognito ':'')+
+                      (this.state.extended ? 'add-link__extended':'')}>
 
         <button onClick={this.openModal} className={'add-link__button '+
                 (this.props.incognito ? 'add-link__button--incognito' : '')}>
@@ -59,7 +74,15 @@ class AddLink extends React.Component {
 
         <p className={'add-link__description '+
            (this.props.incognito ? 'add-link__description--incognito' : '')}>
-          {Localize('ADD')}
+           {
+             this.state.extended &&
+             Localize('ADD_FIRST_MESSAGE')
+           }
+           {
+             !this.state.extended &&
+             Localize('ADD')
+           }
+
         </p>
 
         <LinkModal key={this.props.incognito ? '1' : '0'}

@@ -3,6 +3,7 @@ import * as log from 'loglevel';
 import { Localize } from './localization.js';
 
 class Disclaimer extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -13,7 +14,16 @@ class Disclaimer extends React.Component {
       paragraphs: this.props.paragraphs
     }
 
-    log.debug(this.state);
+    this.closeDisclaimer = this.closeDisclaimer.bind(this);
+    this.showDisclaimer = this.showDisclaimer.bind(this);
+  }
+
+  closeDisclaimer() {
+    this.setState({show: false});
+  }
+
+  showDisclaimer() {
+    this.setState({show: true});
   }
 
   render() {
@@ -23,6 +33,8 @@ class Disclaimer extends React.Component {
           this.state.show &&
           (
             <div className="disclaimer">
+              <i  onClick={this.closeDisclaimer}
+                  className="fas fa-times disclaimer__close"></i>
               <h4>
                 <img className="disclaimer__title-icon"
                  src={'../images/icons/'+this.state.icon} />
@@ -31,10 +43,9 @@ class Disclaimer extends React.Component {
                 </span>
               </h4>
               {
-                this.state.paragraphs.map(paragraph => {
-                  log.debug(paragraph);
+                this.state.paragraphs.map((paragraph, index) => {
                   return (
-                    <p style={{marginLeft: '50px'}}>
+                    <p key={index} style={{marginLeft: '50px'}}>
                       {
                         paragraph.icon &&
                         (

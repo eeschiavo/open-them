@@ -20,8 +20,12 @@ class LinksPage extends React.Component {
     log.info('Welcome - constructor');
 
     this.state = {
-      links: []
+      links: [],
+      showDisclaimer: false
     };
+
+    this.disclaimerRef = React.createRef();
+    this.addLinkRef = React.createRef();
 
     this.disclaimerParagraphs = [
       {
@@ -40,9 +44,19 @@ class LinksPage extends React.Component {
       log.debug('Welcome - links recuperati dallo storage: ', result);
 
       if(result.links) {
-        this.setState({links: result.links});
+
+        const showDisclaimer = result.links.length == 0;
+        if(showDisclaimer) {
+          this.addLinkRef.current.extended(true);
+          this.disclaimerRef.current.showDisclaimer();
+        }
+
+        this.setState({links: result.links, showDisclaimer: showDisclaimer});
       } else {
-        this.setState({links: []});
+
+        this.addLinkRef.current.extended(true);
+        this.disclaimerRef.current.showDisclaimer();
+        this.setState({links: [], showDisclaimer: true});
       }
 
     });
@@ -193,7 +207,10 @@ class LinksPage extends React.Component {
   render() {
     return (
       <Container className="options-page__container">
-        <Disclaimer show={true}
+        {
+
+        }
+        <Disclaimer ref={this.disclaimerRef}
                     icon={'welcome.png'}
                     title={'WELCOME_TITLE'}
                     paragraphs={this.disclaimerParagraphs}
@@ -237,8 +254,10 @@ class LinksPage extends React.Component {
                   }
                 })
               }
-              <AddLink incognito={false}
-                     closeCallback={this.modalCloseCallback}/>
+              <AddLink  disclaimerRef={this.disclaimerRef}
+                        ref={this.addLinkRef}
+                        incognito={false}
+                        closeCallback={this.modalCloseCallback}/>
             </Row>
           </Col>
         </Row>
