@@ -4,7 +4,7 @@
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Open links with ease",
+    "message": "Apri link con facilità",
     "description": "The description of the application"
   },
   "ADD": {
@@ -65,6 +65,14 @@
   },
   "ADD_FIRST_MESSAGE": {
     "message": "Aggiungi il primo sito web",
+    "description": ""
+  },
+  "MENU_ITEM_WEBSITE": {
+    "message": "Siti web",
+    "description": ""
+  },
+  "MENU_ITEM_SETTINGS": {
+    "message": "Impostazioni",
     "description": ""
   }
 }

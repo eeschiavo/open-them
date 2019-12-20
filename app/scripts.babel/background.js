@@ -54,7 +54,10 @@ ChromeStorageSyncGet(['notFirstTime']).then(result => {
 
     chrome.browserAction.setBadgeText({text: 'New'});
 
-    // TODO rimuovere
     chrome.runtime.openOptionsPage();
   }
 });
+
+
+// TODO rimuovere
+chrome.runtime.openOptionsPage();

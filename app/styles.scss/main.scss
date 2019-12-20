@@ -19,6 +19,8 @@
 'blocks/libraries/ReactModal/--incognito/ReactModal--incognito',
 'blocks/options/body/body',
 'blocks/options/options-page/options-page',
+'blocks/options/options-page/--show/options-page--show',
+'blocks/options/options-page/--hide/options-page--hide',
 'blocks/options/options-page/__links-row/options-page__links-row',
 'blocks/options/options-page/__container/options-page__container',
 'blocks/options/options-page/__links-row/--incognito/options-page__links-row--incognito',
@@ -43,4 +45,8 @@
 'blocks/options/counter-badge/counter-badge',
 'blocks/options/counter-badge/--incognito/counter-badge--incognito',
 'blocks/options/sidebar/sidebar',
+'blocks/options/sidebar/__components/sidebar__components',
+'blocks/options/sidebar/__subheader/sidebar__subheader',
+'blocks/options/sidebar/__item/sidebar__item',
+'blocks/options/sidebar/__item/--selected/sidebar__item--selected',
 'popup';
