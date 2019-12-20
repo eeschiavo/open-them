@@ -62,5 +62,9 @@
   "WELCOME_DISCLAIMER_SECOND": {
     "message": "Assicurati di provare tutte le funzionalità di OpenThem, come ad es. la possibilità di aprire link sempre in incognito o di definire l'orario di funzionamento dell'inserzione!",
     "description": ""
+  },
+  "ADD_FIRST_MESSAGE": {
+    "message": "Aggiungi il primo sito web",
+    "description": ""
   }
 }

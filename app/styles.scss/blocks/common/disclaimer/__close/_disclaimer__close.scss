@@ -1,0 +1,7 @@
+@include block('disclaimer') {
+  @include element('close') {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+  }
+}
