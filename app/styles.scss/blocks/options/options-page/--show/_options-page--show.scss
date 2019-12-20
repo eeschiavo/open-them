@@ -1,0 +1,6 @@
+@include block('options-page') {
+  @include modifier('show') {
+    margin: 0 5px;
+    display: block;
+  }
+}
