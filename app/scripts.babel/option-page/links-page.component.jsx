@@ -5,6 +5,7 @@ import AddLink from "./add-link.component.jsx";
 import Link from './link.component.jsx';
 import { ChromeStorageSyncGet, ChromeStorageSyncSet } from '../common/chrome-storage.api.js';
 import { MAX_VISIBLE_ITEMS, MAX_INCOGNITO_ITEMS } from '../common/properties.js'
+import Disclaimer from '../common/disclaimer.component.jsx';
 
 /**
 * Component per la gestione dei link
@@ -21,6 +22,17 @@ class LinksPage extends React.Component {
     this.state = {
       links: []
     };
+
+    this.disclaimerParagraphs = [
+      {
+        key: 'WELCOME_DISCLAIMER_FIRST',
+        icon: ''
+      },
+      {
+        key: 'WELCOME_DISCLAIMER_SECOND',
+        icon: 'lightbulb.png'
+      }
+    ];
 
     // recupero i links
     ChromeStorageSyncGet(['links']).then( result => {
@@ -181,6 +193,11 @@ class LinksPage extends React.Component {
   render() {
     return (
       <Container className="options-page__container">
+        <Disclaimer show={true}
+                    icon={'welcome.png'}
+                    title={'WELCOME_TITLE'}
+                    paragraphs={this.disclaimerParagraphs}
+         />
         <Row className="options-page__links-row justify-content-md-center">
           <Col md="auto">
             {

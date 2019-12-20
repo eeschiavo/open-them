@@ -1,0 +1,6 @@
+@include block('disclaimer') {
+  @include element('title-icon') {
+    width: 50px;
+    margin-top: -4px;
+  }
+}
