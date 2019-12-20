@@ -151,32 +151,19 @@ class LinkModal extends React.Component {
           {
             this.state.isEdit &&
             (
-              <span>Modifica</span>
+              <span>{Localize('EDIT_LINK')}</span>
             )
           }
           {
             !this.state.isEdit &&
             (
-              <span>Aggiungi indirizzo</span>
+              <span>{Localize('ADD_LINK')}</span>
             )
           }
         </p>
 
         {/* Form inserimento URL */}
         <form onSubmit={this.handleSubmit}>
-
-          {/* URL */}
-          <Row className="row input-effect">
-            <Col>
-              <input type="text"
-                   className={'input-effect__move-and-color '+
-                               (this.state.url ? 'has-content' : '')}
-                   value={this.state.url}
-                   onChange={this.handleChangeUrl} />
-              <label>Link</label>
-              <span className="focus-bg"></span>
-            </Col>
-          </Row>
 
           {/* NAME */}
           <Row className="row input-effect">
@@ -186,8 +173,21 @@ class LinkModal extends React.Component {
                             (this.state.name ? 'has-content' : '')}
                    value={this.state.name}
                    onChange={this.handleChangeName} />
-                <label>Nome</label>
+                <label>{Localize('NAME')}</label>
                 <span className="focus-bg"></span>
+            </Col>
+          </Row>
+
+          {/* URL */}
+          <Row className="row input-effect">
+            <Col>
+              <input type="text"
+                   className={'input-effect__move-and-color '+
+                               (this.state.url ? 'has-content' : '')}
+                   value={this.state.url}
+                   onChange={this.handleChangeUrl} />
+              <label>{Localize('LINK')}</label>
+              <span className="focus-bg"></span>
             </Col>
           </Row>
 
@@ -199,7 +199,9 @@ class LinkModal extends React.Component {
                        checked={this.state.incognito}
                        onChange={this.toggleChange} />
                 <i></i>
-                <p>Apri sempre in incognito</p>
+                <p>
+                  {Localize('OPEN_WITH_INCOGNITO_MODE')}
+                </p>
               </label>
             </Col>
           </Row>
@@ -209,7 +211,7 @@ class LinkModal extends React.Component {
             <Col className="link-modal__buttons">
               <button className="ot-button ot-button--cancel"
                       onClick={this.closeModal}>
-                Annulla
+                {Localize('CANCEL')}
               </button>
               <button className="ot-button ot-button--confirm"
                       type="submit"
@@ -217,13 +219,13 @@ class LinkModal extends React.Component {
                 {
                   !this.state.isEdit &&
                   (
-                    'Aggiungi'
+                    Localize('ADD')
                   )
                 }
                 {
                   this.state.isEdit &&
                   (
-                    'Modifica'
+                    Localize('EDIT')
                   )
                 }
 

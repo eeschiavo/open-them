@@ -26,6 +26,29 @@
   "REMOVE": {
     "message": "Rimuovi",
     "description": ""
+  },
+  "OPEN_WITH_INCOGNITO_MODE": {
+    "message": "Apri sempre in incognito",
+    "description": ""
+  },
+  "NAME": {
+    "message": "Nome",
+    "description": ""
+  },
+  "LINK": {
+    "message": "Indirizzo",
+    "description": ""
+  },
+  "ADD_LINK": {
+    "message": "Aggiungi indirizzo",
+    "description": ""
+  },
+  "EDIT_LINK": {
+    "message": "Modifica indirizzo",
+    "description": ""
+  },
+  "CANCEL": {
+    "message": "Annulla",
+    "description": ""
   }
-
 }

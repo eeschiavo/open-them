@@ -1,5 +1,6 @@
 import React from 'react';
 import * as log from 'loglevel';
+import { Localize } from '../common/localization.js';
 
 /**
  * Sidebar della pagina options
@@ -19,7 +20,7 @@ class Sidebar extends React.Component {
     return (
       <nav id="sidebar" className="sidebar">
          <div className="sidebar__header">
-             <h3>Open Them</h3>
+             <h3>{Localize('appName')}</h3>
          </div>
 
          <ul className="sidebar__components">
