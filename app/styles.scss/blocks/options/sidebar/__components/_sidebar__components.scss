@@ -1,0 +1,7 @@
+@include block('sidebar') {
+  @include element('components') {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+  }
+}
