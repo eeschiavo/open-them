@@ -24,21 +24,27 @@ class TopBar extends React.Component {
    * Permette l'abilitazione multipla dei siti web selezionati
    */
   enableLinks() {
-    this.props.enableLinks();
+    if(!this.state.btnDisabled) {
+      this.props.enableLinks();
+    }
   }
 
   /**
    * Permette la disabilitazione multipla dei siti we selezionati
    */
   disableLinks() {
-    this.props.disableLinks();
+    if(!this.state.btnDisabled) {
+      this.props.disableLinks();
+    }
   }
 
   /**
    * Permette la cancellazione multipla dei siti we selezionati
    */
   removeLinks() {
-    this.props.removeLinks();
+    if(!this.state.btnDisabled) {
+      this.props.removeLinks();
+    }
   }
 
   /**
@@ -79,9 +85,10 @@ class TopBar extends React.Component {
             {
               !this.state.editMode &&
               (
-                <button className="ot-button ot-button--cancel"
-                        type="button"
-                        onClick={this.startEdit}>
+                <button
+                  className={'ot-button ot-button--cancel'}
+                  type="button"
+                  onClick={this.startEdit}>
                   {Localize('EDIT')}
                 </button>
               )
