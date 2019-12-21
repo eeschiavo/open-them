@@ -56,12 +56,19 @@ class Link extends React.Component {
 
   /**
    * Abilitazione della modalità di modifica
-   * @param  {[type]} enter [description]
-   * @return {[type]}       [description]
+   * @param  {boolean} enter se abilitare o meno la modalità di modifica
+   * @param {boolean} uncheck se fare l'uncheck degli elementi
    */
-  enterEditMode(enter) {
+  enterEditMode(enter, uncheck) {
+
     log.debug('Link - enterEditMode, enter: ', enter);
-    this.setState({editMode:enter}, () => {
+
+    let checked = this.state.checked;
+    if(uncheck) {
+      checked = false;
+    }
+
+    this.setState({editMode:enter, checked:checked}, () => {
       log.debug('Link - enterEditMode, this.state: ', this.state);
     });
   }
