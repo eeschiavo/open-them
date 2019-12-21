@@ -11,5 +11,10 @@
 
   &:hover {
     background-color: white;
+    cursor: pointer;
+
+    .add-link__button {
+      transform: scale(1.1);
+    }
   }
 }
