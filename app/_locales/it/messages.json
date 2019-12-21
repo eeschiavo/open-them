@@ -80,15 +80,15 @@
     "description": ""
   },
   "BUTTON_ENABLE_ALL_LINKS": {
-    "message": "Abilita tutti i siti web per l'avvio automatico",
+    "message": "Abilitazione dei siti web per l'avvio automatico",
     "description": ""
   },
   "BUTTON_DISABLE_ALL_LINKS": {
-    "message": "Disabilita tutti i siti web per l'avvio automatico",
+    "message": "Disabilitazione dei siti web per l'avvio automatico",
     "description": ""
   },
   "BUTTON_REMOVE_ALL_LINKS": {
-    "message": "Rimuove tutti i siti web",
+    "message": "Rimozione dei siti web web",
     "description": ""
   }
 }
