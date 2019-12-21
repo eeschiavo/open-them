@@ -180,16 +180,20 @@ class LinksPage extends React.Component {
    */
   updateSavedLinks(links) {
 
-    // aggiorno lo state
-    this.setState({
-      links: links
-    }, () => {
+    return new Promise(resolve => {
 
-      log.debug('updateSavedLinks - link aggiornato nello state');
+      // aggiorno lo state
+      this.setState({
+        links: links
+      }, () => {
 
-      // salvo le modifiche nello storage
-      ChromeStorageSyncSet({links: links}).then( () => {
-        log.debug('removeLink - link aggiornato nello storage');
+        log.debug('updateSavedLinks - link aggiornato nello state');
+
+        // salvo le modifiche nello storage
+        ChromeStorageSyncSet({links: links}).then( () => {
+          log.debug('removeLink - link aggiornato nello storage');
+          resolve();
+        });
       });
     });
   }
@@ -259,10 +263,10 @@ class LinksPage extends React.Component {
 
   /**
    * Modifica di più link contemporaneamente
-   * @param  {[type]} disable se disabilitarli
-   * @param  {[type]} enable  se abilitarli
-   * @param  {[type]} remove  se rimuoverli
-   * @return {[type]}         i link modificati
+   * @param  {boolean} disable se disabilitarli
+   * @param  {boolean} enable  se abilitarli
+   * @param  {boolean} remove  se rimuoverli
+   * @return {[LinkData]}         i link modificati
    */
   editBulkLinks(enable, disable, remove) {
 
@@ -284,6 +288,9 @@ class LinksPage extends React.Component {
       }
     }
 
+    log.debug('LinksPage - editBulkLinks, parametri: enable '+enable+' disable '+disable+' remove '+remove);
+    log.debug('LinksPage - editBulklLinks, links dopo la modifica: ', links);
+
     return links;
   }
 
@@ -291,10 +298,18 @@ class LinksPage extends React.Component {
    * Abilitazione di link multipli
    */
   enableLinks() {
+
+    log.info('LinksPage - enableLinks');
+
     let links = this.editBulkLinks(true, false, false);
-    this.setState({links}, () => {
+
+    log.debug('LinksPage - enableLinks, links modificati: ', links);
+    log.debug('LinksPage - enableLinks, state prima della modifica: ', this.state);
+
+    this.updateSavedLinks(links).then(() => {
+
+      log.debug('LinksPage - enableLinks, state dopo la modifica: ', this.state);
       this.checkedLinks = [];
-      this.enterEditMode(false, true);
       this.topBarRef.current.stopEdit();
     });
   }
@@ -305,9 +320,8 @@ class LinksPage extends React.Component {
    */
   disableLinks() {
     let links = this.editBulkLinks(false, true, false);
-    this.setState({links}, () => {
+    this.updateSavedLinks(links).then(() => {
       this.checkedLinks = [];
-      this.enterEditMode(false, true);
       this.topBarRef.current.stopEdit();
     });
   }
@@ -318,9 +332,8 @@ class LinksPage extends React.Component {
    */
   removeLinks() {
     let links = this.editBulkLinks(false, false, true);
-    this.setState({links}, () => {
+    this.updateSavedLinks(links).then(() => {
       this.checkedLinks = [];
-      this.enterEditMode(false, true);
       this.topBarRef.current.stopEdit();
     });
   }
@@ -350,7 +363,7 @@ class LinksPage extends React.Component {
                          className="counter-badge">
                       <span>
                         {
-                            this.countLinks()
+                            this.countLinks(false)
                         }
                       </span>
                       <span>/</span>
