@@ -82,16 +82,17 @@ class LinksPage extends React.Component {
 
   /**
    * Abilitazione della modalità modifica dei link
-   * @param  {[type]} enter se abilitare o meno la modalità
+   * @param  {boolean} enter se abilitare o meno la modalità
+   * @param  {boolean} uncheck se effettuare l'uncheck dei link
    */
-  enterEditMode(enter) {
+  enterEditMode(enter, uncheck) {
 
     log.info('LinksPage - enterEditMode, enter: ', enter);
     log.debug('LinksPage - enterEditMode, this.linksRef: ', this.linksRef);
 
     for(let el in this.linksRef) {
       if(this.linksRef[el].current) {
-        this.linksRef[el].current.enterEditMode(enter);
+        this.linksRef[el].current.enterEditMode(enter, uncheck);
       }
     }
   }
@@ -250,6 +251,9 @@ class LinksPage extends React.Component {
       this.checkedLinks.push(linkData);
     }
 
+    let enableTopBarBtns = this.checkedLinks.length > 0;
+    this.topBarRef.current.changeButtonsStatus(enableTopBarBtns);
+
     log.debug('LinksPage - checkLink, this.checkedLinks: ', this.checkedLinks);
   }
 
@@ -290,6 +294,7 @@ class LinksPage extends React.Component {
     let links = this.editBulkLinks(true, false, false);
     this.setState({links}, () => {
       this.checkedLinks = [];
+      this.enterEditMode(false, true);
       this.topBarRef.current.stopEdit();
     });
   }
@@ -302,6 +307,7 @@ class LinksPage extends React.Component {
     let links = this.editBulkLinks(false, true, false);
     this.setState({links}, () => {
       this.checkedLinks = [];
+      this.enterEditMode(false, true);
       this.topBarRef.current.stopEdit();
     });
   }
@@ -314,6 +320,7 @@ class LinksPage extends React.Component {
     let links = this.editBulkLinks(false, false, true);
     this.setState({links}, () => {
       this.checkedLinks = [];
+      this.enterEditMode(false, true);
       this.topBarRef.current.stopEdit();
     });
   }
