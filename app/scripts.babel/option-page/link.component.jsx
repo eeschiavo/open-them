@@ -23,10 +23,10 @@ class Link extends React.Component {
 
     this.state = {
       domainIcon: '',
+      linkData: this.props.linkObj,
       firstLetter: (this.props.linkObj.name ?
         this.props.linkObj.name.charAt(0) :
         this.props.linkObj.domain.charAt(0)),
-      enabled: this.props.linkObj.enabled,
       iconRetrieved: false,
       useIconFallback: false,
       editMode: false,
@@ -35,7 +35,7 @@ class Link extends React.Component {
 
     this.modalRef = React.createRef();
 
-    const domain = this.props.linkObj.domain;
+    const domain = this.state.linkData.domain;
     log.debug('Link - constructor - dominio: ', domain);
 
     this.domainIcon = URL_BESTICON.replace('%domain%', domain);
@@ -78,7 +78,7 @@ class Link extends React.Component {
    */
   toggleChange() {
     this.setState({checked: !this.state.checked}, () => {
-      this.props.checkLink(this.props.linkObj, this.state.checked);
+      this.props.checkLink(this.state.linkData, this.state.checked);
     });
   }
 
@@ -102,7 +102,7 @@ class Link extends React.Component {
    * Modifica di un link esistente
    */
   editLink() {
-    this.modalRef.current.openModal(true, this.props.linkObj);
+    this.modalRef.current.openModal(true, this.state.linkData);
   }
 
   /**
@@ -137,16 +137,17 @@ class Link extends React.Component {
    * Rimozione di un link
    */
   removeLink() {
-    this.props.removeLink(this.props.linkObj, this.props.index);
+    this.props.removeLink(this.state.linkData, this.props.index);
   }
 
   /**
    * Disabilizatione di un link (per il lancio automatico)
    */
   disableLink() {
-    this.setState({enabled: false}, () => {
-      this.props.linkObj.enabled = false;
-      this.props.updateLink(this.props.linkObj, this.props.index);
+    let linkData = this.state.linkData;
+    linkData.enabled = false;
+    this.setState({linkData: linkData}, () => {
+      this.props.updateLink(this.state.linkData, this.props.index);
     });
   }
 
@@ -154,15 +155,19 @@ class Link extends React.Component {
    * Abilitazione di un link (per il lancio automatico)
    */
   enableLink() {
-    this.setState({enabled: true}, () => {
-      this.props.linkObj.enabled = true;
-      this.props.updateLink(this.props.linkObj, this.props.index);
+    let linkData = this.state.linkData;
+    linkData.enabled = true;
+    this.setState({linkData: linkData}, () => {
+      this.props.updateLink(this.state.linkData, this.props.index);
     });
   }
 
+  /**
+   * Apertura di un sito web
+   */
   openLink() {
     if(!this.state.editMode) {
-      OpenLink(this.props.linkObj);
+      OpenLink(this.state.linkData);
     } else {
       this.toggleChange();
     }
@@ -170,14 +175,14 @@ class Link extends React.Component {
 
   render() {
 
-    let link = this.props.linkObj;
+    let link = this.state.linkData;
 
     return (
       <React.Fragment>
         <MenuProvider id={this.contextMenuId}>
           <Col
               className={'domain'+
-                          (!this.state.enabled ? ' domain--disabled':'')+
+                          (!this.state.linkData.enabled ? ' domain--disabled':'')+
                           (link.incognito ? ' domain--incognito':'')+
                           (this.state.editMode ? ' domain--edit-mode':'')}
               onTouchStart={this.handleButtonPress}
@@ -252,7 +257,7 @@ class Link extends React.Component {
           </Item>
           <Separator />
           {
-            this.state.enabled &&
+            this.state.linkData.enabled &&
             (
               <Item onClick={this.disableLink}>
                 <IconFont className="fas fa-minus-square contentmenu-icon" />
@@ -261,7 +266,7 @@ class Link extends React.Component {
             )
           }
           {
-            !this.state.enabled &&
+            !this.state.linkData.enabled &&
             (
               <Item onClick={this.enableLink}>
                 <IconFont className="fas fa-plus-square contentmenu-icon" />
