@@ -1,11 +1,17 @@
 'use strict';
 import * as log from 'loglevel';
+import moment from 'moment';
 import { ChromeStorageSyncGet, ChromeStorageSyncSet, ChromeStorageLocalGet, ChromeStorageLocalSet } from './common/chrome-storage.api.js';
 
 chrome.runtime.onInstalled.addListener(details => {
   console.log('previousVersion', details.previousVersion);
 });
 
+
+/**
+ * Apertura dei links
+ * @param  {array} links i link da aprire
+ */
 let openLinks = function(links) {
 
   links.forEach(linkData => {
@@ -58,16 +64,49 @@ ChromeStorageSyncGet(['notFirstTime', 'links', 'settings']).then(result => {
 
         if(localEnabled) {
 
-          if(settings.askBeforeOpen) {
+          // devo verificare l'orario
+          let { fromHours, toHours } = settings;
 
-            if(window.confirm('OpenThem - vuoi aprire i siti web preimpostati? '+
-            'per disattivare questo messaggio vai nelle impostazioni dell\'estensione')) {
+          let open = true;
+          let timeFormat = 'HH:mm';
 
-              openLinks(links);
+          if(fromHours && toHours) {
 
+            let from = moment(fromHours, timeFormat);
+            let to = moment(toHours, timeFormat);
+
+            if(!moment().isBetween(from, to)) {
+              open = false;
             }
-          } else {
-            openLinks(links);
+
+          } else if(fromHours) {
+
+            let from = moment(fromHours, timeFormat);
+            if(moment().isBefore(from)) {
+              open = false;
+            }
+
+          } else if(toHours) {
+
+            let to = moment(toHours, timeFormat);
+            if(moment().isAfter(to)) {
+              open = false;
+            }
+          }
+
+          if(open) {
+
+            if(settings.askBeforeOpen) {
+
+              if(window.confirm('OpenThem - vuoi aprire i siti web preimpostati? '+
+              'per disattivare questo messaggio vai nelle impostazioni dell\'estensione')) {
+
+                openLinks(links);
+
+              }
+            } else {
+              openLinks(links);
+            }
           }
         }
 
@@ -83,7 +122,9 @@ ChromeStorageSyncGet(['notFirstTime', 'links', 'settings']).then(result => {
         'notFirstTime':true,
         'settings':{
           enabled: true,
-          askBeforeOpen: false
+          askBeforeOpen: false,
+          fromHours: '',
+          toHours: ''
         }
       }
     ).then(res => {

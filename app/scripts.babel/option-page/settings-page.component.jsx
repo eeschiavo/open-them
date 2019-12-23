@@ -1,9 +1,11 @@
 import React from 'react';
 import * as log from 'loglevel';
 import { Localize } from '../common/localization.js';
-import {Container, Row, Col} from 'react-bootstrap';
+import { HOURS_SET_TIME } from '../common/properties.js';
+import { Container, Row, Col } from 'react-bootstrap';
 import { ChromeStorageSyncGet, ChromeStorageSyncSet, ChromeStorageLocalGet, ChromeStorageLocalSet } from '../common/chrome-storage.api.js';
 import TopBar from './top-bar.component.jsx';
+import TimeInput from 'react-input-time';
 
 /**
  * Pagina delle impostazioni
@@ -18,7 +20,9 @@ class SettingsPage extends React.Component {
       enabled: true,
       deviceEnabled: true,
       askBeforeOpen: false,
-      localEnabled: true
+      localEnabled: true,
+      fromHours: '',
+      toHours: ''
     }
 
     // recupero delle impostazioni
@@ -30,11 +34,19 @@ class SettingsPage extends React.Component {
 
         log.debug('Settings - settings recuperata dallo storage: ', settings);
 
-        if(settings.enabled !== this.state.enabled) {
-          this.setState({enabled:settings.enabled});
+        let { enabled, askBeforeOpen, fromHours, toHours } = settings;
+
+        if(enabled !== this.state.enabled) {
+          this.setState({enabled:enabled});
         }
-        if(settings.askBeforeOpen !==  this.state.askBeforeOpen) {
-            this.setState({askBeforeOpen: result.settings.askBeforeOpen});
+        if(askBeforeOpen !==  this.state.askBeforeOpen) {
+          this.setState({askBeforeOpen:settings.askBeforeOpen});
+        }
+        if(fromHours !== this.state.fromHours) {
+          this.setState({fromHours:fromHours});
+        }
+        if(toHours !== this.state.toHours) {
+          this.setState({toHours:toHours});
         }
 
       } else {
@@ -44,7 +56,9 @@ class SettingsPage extends React.Component {
           {
             'settings': {
               enabled: true,
-              askBeforeOpen: false
+              askBeforeOpen: false,
+              fromHours: '',
+              toHours: ''
             }
           }
         ).then(res => {
@@ -67,6 +81,8 @@ class SettingsPage extends React.Component {
     this.toggleEnabled = this.toggleEnabled.bind(this);
     this.toggleAskBeforeOpen = this.toggleAskBeforeOpen.bind(this);
     this.toggleLocalEnabled = this.toggleLocalEnabled.bind(this);
+    this.onChangeTime = this.onChangeTime.bind(this);
+    this.setTime = this.setTime.bind(this);
   }
 
   /**
@@ -81,7 +97,9 @@ class SettingsPage extends React.Component {
       {
         'settings': {
           enabled: !this.state.enabled,
-          askBeforeOpen: this.state.askBeforeOpen
+          askBeforeOpen: this.state.askBeforeOpen,
+          fromHours: this.state.fromHours,
+          toHours: this.state.toHours
         }
       }
     ).then(res => {
@@ -107,7 +125,9 @@ class SettingsPage extends React.Component {
       {
         'settings': {
           enabled: this.state.enabled,
-          askBeforeOpen: !this.state.askBeforeOpen
+          askBeforeOpen: !this.state.askBeforeOpen,
+          fromHours: this.state.fromHours,
+          toHours: this.state.toHours
         }
       }
     ).then(res => {
@@ -144,6 +164,66 @@ class SettingsPage extends React.Component {
       });
     });
 
+  }
+
+  /**
+   * Impostazione dell'ora di funzionamento
+   * @param {[type]}  value  [description]
+   * @param {Boolean} isFrom [description]
+   */
+  setTime(value, isFrom) {
+
+    ChromeStorageSyncSet(
+      {
+        'settings': {
+          enabled: this.state.enabled,
+          askBeforeOpen: this.state.askBeforeOpen,
+          fromHours: (isFrom ? value : this.state.fromHours),
+          toHours: (isFrom ? this.state.toHours : value)
+        }
+      }
+    );
+
+  }
+
+  /**
+   * Richiamato ad ogni modifica del time
+   * @param  {object} event event dell'input
+   * @param  {boolean} isFrom se è dal campo di input from
+   * @return {[type]}       [description]
+   */
+  onChangeTime(event, isFrom) {
+
+    let hours = event.target.value;
+
+    if(isFrom) {
+
+      this.setState({
+        fromHours: hours
+      }, () => {
+        if(this.hoursFromSet) {
+          clearTimeout(this.hoursFromSet);
+        }
+
+        this.hoursFromSet = setTimeout(() => {
+          this.setTime(hours, isFrom);
+        }, {HOURS_SET_TIME});
+      });
+
+    } else {
+
+      this.setState({
+        toHours: hours
+      }, () => {
+        if(this.hoursToSet) {
+          clearTimeout(this.hoursToSet);
+        }
+
+        this.hoursToSet = setTimeout(() => {
+          this.setTime(hours, isFrom);
+        }, {HOURS_SET_TIME});
+      });
+    }
   }
 
   render() {
@@ -190,6 +270,33 @@ class SettingsPage extends React.Component {
                   checked={this.state.localEnabled}
                   onChange={this.toggleLocalEnabled} />
                   <i></i>
+                </label>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <label className="settings-page__hours-label">
+                  <p>
+                    {Localize('SET_HOURS')}
+                  </p>
+                  <div>
+                    <span>{Localize('HOURS_FROM')}</span>
+                    <input
+                      type="time"
+                      className="input-time"
+                      value={this.state.fromHours}
+                      onChange={(event) => {this.onChangeTime(event, true)}}
+                    />
+                  </div>
+                  <div>
+                    <span>{Localize('HOURS_TO')}</span>
+                    <input
+                      type="time"
+                      className="input-time"
+                      value={this.state.toHours}
+                      onChange={(event) => {this.onChangeTime(event, false)}}
+                    />
+                  </div>
                 </label>
               </Col>
             </Row>

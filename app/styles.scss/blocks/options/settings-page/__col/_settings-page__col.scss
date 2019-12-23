@@ -5,6 +5,10 @@
       justify-content: flex-end;
       margin: 0;
       padding: 10px 0;
+
+      i {
+        margin: 0 25px;
+      }
     }
 
     .row:nth-child(even) {
