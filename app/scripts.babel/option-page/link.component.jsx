@@ -52,6 +52,17 @@ class Link extends React.Component {
     this.openLink = this.openLink.bind(this);
     this.toggleChange = this.toggleChange.bind(this);
     this.modalClosed = this.modalClosed.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  /**
+   * Chiusura del modal eventualmente aperto
+   * @return {[type]} [description]
+   */
+  closeModal() {
+    if(this.modalRef.current) {
+      this.modalRef.current.closeModal();
+    }
   }
 
   /**
