@@ -78,6 +78,20 @@ class LinksPage extends React.Component {
     this.modalCloseCallback = this.modalCloseCallback.bind(this);
     this.almostOneIncognitoLink = this.almostOneIncognitoLink.bind(this);
     this.almostOneVisibleLink = this.almostOneVisibleLink.bind(this);
+    this.closeModals = this.closeModals.bind(this);
+  }
+
+  /**
+   * Chiusura dei modal eventualmente aperti
+   * @return {[type]} [description]
+   */
+  closeModals() {
+    for(let el in this.linksRef) {
+      if(this.linksRef[el].current) {
+        this.linksRef[el].current.closeModal();
+      }
+    }
+    this.addLinkRef.current.closeModal();
   }
 
   /**
