@@ -1,3 +1,23 @@
+
+/**
+ * Apertura di un link in un nuovo tab
+ * @param       {[type]} link il link da aprire
+ */
+export function OpenLink(link) {
+
+  let url = link.url;
+  if(url && !url.startsWith('http') && !url.startsWith('https')) {
+    url = 'https://'+url;
+  }
+
+  if(link.incognito) {
+    chrome.windows.create({url: url, incognito: true});
+  } else {
+    chrome.tabs.create({url: url});
+  }
+}
+
+
 /**
  * Creazione di un integer random
  * @param  min il valore minimo

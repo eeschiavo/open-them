@@ -1,0 +1,13 @@
+@include block('domain') {
+  @include modifier('edit-mode') {
+    background-color: white;
+    
+    &:not(.domain--incognito) {
+      box-shadow: 0 0 3px 1px #a9a9a9;
+    }
+
+    &.domain--incognito {
+      background-color: #a9a9a9;
+    }
+  }
+}

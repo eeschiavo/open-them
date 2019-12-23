@@ -64,10 +64,10 @@ class AddLink extends React.Component {
   render() {
 
     return (
-      <Col className={'add-link '+(this.props.incognito ? 'add-link--incognito ':'')+
+      <Col onClick={this.openModal} className={'add-link '+(this.props.incognito ? 'add-link--incognito ':'')+
                       (this.state.extended ? 'add-link__extended':'')}>
 
-        <button onClick={this.openModal} className={'add-link__button '+
+        <button className={'add-link__button '+
                 (this.props.incognito ? 'add-link__button--incognito' : '')}>
           <i className="fas fa-plus"></i>
         </button>
