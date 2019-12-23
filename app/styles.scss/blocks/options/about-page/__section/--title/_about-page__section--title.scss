@@ -1,0 +1,11 @@
+@include block('about-page') {
+  @include element('section') {
+    @include modifier('title') {
+      font-weight: 600;
+      font-size: 17px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  }
+}

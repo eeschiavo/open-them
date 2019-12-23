@@ -35,3 +35,22 @@ export const AUTHOR = 'Ernesto Schiavo';
  * @type {Number}
  */
 export const HOURS_SET_TIME = 1000;
+
+/**
+ * URL per l'immagine dell'autore
+ * @type {String}
+ */
+export const AUTHOR_IMAGE = 'https://ernestoschiavo.it/wp-content/uploads/2015/03/fotoProfilo-e1519477271732.png';
+
+/**
+ * Link dei software di terze parti utilizzati
+ * @type {Object}
+ */
+export const LINKS = {
+  REACT: 'https://it.reactjs.org/',
+  ICONS8: 'https://icons8.com/',
+  MOMENTJS: 'https://momentjs.com/',
+  BOOTSTRAP: 'https://getbootstrap.com/',
+  FONTAWESOME: 'https://fontawesome.com/',
+  AXIOS: 'https://github.com/axios/axios'
+}

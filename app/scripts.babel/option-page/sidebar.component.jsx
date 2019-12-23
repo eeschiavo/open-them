@@ -1,5 +1,6 @@
 import React from 'react';
 import * as log from 'loglevel';
+import { Row, Col } from 'react-bootstrap';
 import { Localize } from '../common/localization.js';
 
 /**
@@ -61,6 +62,16 @@ class Sidebar extends React.Component {
               </p>
             </li>
         </ul>
+
+        <footer
+          className="sidebar__footer"
+          onClick={() => this.selectItem(3)}>
+          <Row>
+            <Col>
+              {Localize('ABOUT')}
+            </Col>
+          </Row>
+        </footer>
      </nav>
     )
   }
