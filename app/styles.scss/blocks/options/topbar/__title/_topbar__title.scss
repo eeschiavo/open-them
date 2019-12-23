@@ -1,0 +1,5 @@
+@include block('topbar') {
+  @include element('title') {
+    display: block;
+  }
+}

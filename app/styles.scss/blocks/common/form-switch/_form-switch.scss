@@ -54,8 +54,12 @@
 
 .form-switch input { display: none; }
 
-.form-switch input:checked + i { background-color: #ccc; }
+.form-switch input:checked + i { background-color: $color-success; }
 
 .form-switch input:checked + i::before { transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0); }
 
 .form-switch input:checked + i::after { transform: translate3d(22px, 2px, 0); }
+
+.form-switch p {
+  margin-bottom: 0;
+}
