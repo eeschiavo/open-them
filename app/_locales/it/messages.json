@@ -106,5 +106,29 @@
   "HOURS_TO": {
     "message": "alle ore",
     "description": ""
+  },
+  "ABOUT": {
+    "message": "Per saperne di più",
+    "description": ""
+  },
+  "THE_AUTHOR": {
+    "message": "L'autore",
+    "description": ""
+  },
+  "AUTHOR_DESCRIPTION": {
+    "message": "Mi chiamo Ernesto Schiavo e sono un Ingegnere Informatico. Mi piace imparare sempre cose nuove e sono specializzato nello sviluppo di applicativi per il web.",
+    "description": ""
+  },
+  "WHY_THIS_EXTENSION": {
+    "message": "Perché questa estensione",
+    "description": ""
+  },
+  "EXTENSION_DESCRIPTION": {
+    "message": "OpenThem nasce da un'esigenza personale. Sono abituato ad avviare sempre determinati siti ad ogni apertura di Chrome. Un giorno mi sono chiesto, perché non renderlo automatico?",
+    "description": ""
+  },
+  "THIRD_PARTY_SOFTWARE": {
+    "message": "Software di terze parti utilizzati",
+    "description": ""
   }
 }
