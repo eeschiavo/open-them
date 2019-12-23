@@ -1,10 +1,10 @@
 'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import OptionsPage from './option-page/options-page.component.jsx';
+import Bootstrap from './option-page/bootstrap.component.jsx';
 import * as log from 'loglevel';
 
 ReactDOM.render(
-  <OptionsPage />,
+  <Bootstrap />,
   document.getElementById('options-root')
 );
