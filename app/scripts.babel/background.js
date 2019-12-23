@@ -1,63 +1,121 @@
 'use strict';
 import * as log from 'loglevel';
-import { ChromeStorageSyncGet, ChromeStorageSyncSet } from './common/chrome-storage.api.js';
+import { ChromeStorageSyncGet, ChromeStorageSyncSet, ChromeStorageLocalGet, ChromeStorageLocalSet } from './common/chrome-storage.api.js';
 
 chrome.runtime.onInstalled.addListener(details => {
   console.log('previousVersion', details.previousVersion);
 });
 
+let openLinks = function(links) {
+
+  links.forEach(linkData => {
+
+    // se è impostata la URL
+    if(linkData.url) {
+      let url = linkData.url;
+
+      if(!url.startsWith('http')) {
+        url = 'https://'+url;
+      }
+
+      //se è in incognito
+      if(linkData.incognito) {
+
+        log.debug('background.js - apro url in incognito: ', url);
+        chrome.windows.create({url: url, incognito: true});
+
+      } else {
+
+        log.debug('background.js - apro url non in incognito: ', url);
+        chrome.tabs.create({url: url});
+      }
+    }
+  });
+}
+
 // Verifico non sia la prima volta che viene avviata l'estensione
-ChromeStorageSyncGet(['notFirstTime']).then(result => {
+ChromeStorageSyncGet(['notFirstTime', 'links', 'settings']).then(result => {
 
   log.debug('background.js - ChromeStorageSyncGet(notFirstTime): ', result);
 
-  if(result && result.notFirstTime == true) {
+  let { notFirstTime, links, settings } = result;
 
-    // Avvio links
-    chrome.storage.sync.get(['links'], function(result) {
+  // se non è la prima volta e se ci sono link da aprire
+  if(notFirstTime == true) {
 
-      log.debug('background.js - url salvate: ', result);
+    // se l'estensione è abilitata
+    if(settings && settings.enabled && links && links.length > 0) {
 
-      // se ci sono url impostati
-      if(result.links) {
+      // verifico ci sia l'abilitazione su questo device
+      ChromeStorageLocalGet(['localSettings']).then(localResult => {
 
-        // per ogni url impostata
-        result.links.forEach(urlObj => {
+        log.debug('get del localSettings nel local, localResult:', localResult);
+        let localEnabled = true;
 
-          // se è impostata la URL
-          if(urlObj.url) {
+        if(localResult.localSettings && localResult.localSettings.enabled === false) {
+          localEnabled = false;
+        }
 
-            //TODO remove
-            return;
+        if(localEnabled) {
 
-            //se è in incognito
-            if(urlObj.incognito) {
+          if(settings.askBeforeOpen) {
 
-              log.debug('background.js - apro url in incognito: ', urlObj.url);
-              chrome.windows.create({url: urlObj.url, incognito: true});
+            if(window.confirm('OpenThem - vuoi aprire i siti web preimpostati? '+
+            'per disattivare questo messaggio vai nelle impostazioni dell\'estensione')) {
 
-            } else {
+              openLinks(links);
 
-              log.debug('background.js - apro url non in incognito: ', urlObj.url);
-              chrome.tabs.create({url: urlObj.url});
             }
+          } else {
+            openLinks(links);
           }
-        })
-      }
-    });
+        }
+
+      });
+
+    }
 
   } else {
 
-    ChromeStorageSyncSet({'notFirstTime':true}).then(res => {
+    // imposto che non è più la prima volta
+    ChromeStorageSyncSet(
+      {
+        'notFirstTime':true,
+        'settings':{
+          enabled: true,
+          askBeforeOpen: false
+        }
+      }
+    ).then(res => {
       log.debug('background.js - ChromeStorageSyncSet(notFirstTime): ', res);
     });
 
-    chrome.browserAction.setBadgeText({text: 'New'});
+    // imposto un uuid per questo device
+    ChromeStorageLocalGet(['localSettings']).then(result => {
 
+      let { localSettings } = result;
+
+      if(!localSettings) {
+
+        ChromeStorageLocalSet(
+          {
+            'localSettings': {
+              enabled: true
+            }
+          }
+        );
+      }
+
+    });
+
+    chrome.browserAction.setBadgeText({text: 'New'});
     chrome.runtime.openOptionsPage();
   }
 });
 
 
 // TODO rimuovere
-chrome.runtime.openOptionsPage();
+// chrome.runtime.openOptionsPage();
+chrome.browserAction.onClicked.addListener(function(tab) {
+  chrome.runtime.openOptionsPage();
+});

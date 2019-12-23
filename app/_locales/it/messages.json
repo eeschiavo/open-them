@@ -83,4 +83,16 @@
     "message": "Fine",
     "description": ""
   },
+  "ENABLE_EXTENSION": {
+    "message": "Estensione abilitata",
+    "description": ""
+  },
+  "ENABLE_THIS_DEVICE": {
+    "message": "Abilita estensione su questo dispositivo",
+    "description": ""
+  },
+  "ASK_BEFORE_OPEN": {
+    "message": "Chiedi prima di aprire i siti web",
+    "description": ""
+  }
 }
