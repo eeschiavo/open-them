@@ -4,7 +4,7 @@
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Open links with ease",
+    "message": "Apri link con facilità",
     "description": "The description of the application"
   },
   "ADD": {
@@ -50,5 +50,37 @@
   "CANCEL": {
     "message": "Annulla",
     "description": ""
-  }
+  },
+  "WELCOME_TITLE": {
+    "message": "Benvenuto!",
+    "description": ""
+  },
+  "WELCOME_DISCLAIMER_FIRST": {
+    "message": "Con OpenThem puoi salvare i link dei tuoi siti web preferiti di modo che vengano aperti ogni volta che lanci Chrome!",
+    "description": ""
+  },
+  "WELCOME_DISCLAIMER_SECOND": {
+    "message": "Assicurati di provare tutte le funzionalità di OpenThem, come ad es. la possibilità di aprire link sempre in incognito o di definire l'orario di funzionamento dell'inserzione!",
+    "description": ""
+  },
+  "ADD_FIRST_MESSAGE": {
+    "message": "Aggiungi il primo sito web",
+    "description": ""
+  },
+  "MENU_ITEM_WEBSITE": {
+    "message": "Siti web",
+    "description": ""
+  },
+  "MENU_ITEM_SETTINGS": {
+    "message": "Impostazioni",
+    "description": ""
+  },
+  "CREATED_BY": {
+    "message": "Creata da",
+    "description": ""
+  },
+  "END": {
+    "message": "Fine",
+    "description": ""
+  },
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import * as log from 'loglevel';
 import axios from 'axios';
-import { RandomInt } from '../common/utilities.js';
+import { RandomInt, OpenLink } from '../common/utilities.js';
 import { Menu, Item, Separator, IconFont, Submenu, MenuProvider } from 'react-contexify';
 import Spinner from '../common/spinner.component.jsx';
 import LinkModal from './link-modal.component.jsx';
@@ -23,30 +23,63 @@ class Link extends React.Component {
 
     this.state = {
       domainIcon: '',
+      linkData: this.props.linkObj,
       firstLetter: (this.props.linkObj.name ?
         this.props.linkObj.name.charAt(0) :
         this.props.linkObj.domain.charAt(0)),
-      enabled: this.props.linkObj.enabled,
       iconRetrieved: false,
-      useIconFallback: false
+      useIconFallback: false,
+      editMode: false,
+      checked: false
     };
 
     this.modalRef = React.createRef();
 
-    const domain = this.props.linkObj.domain;
+    const domain = this.state.linkData.domain;
     log.debug('Link - constructor - dominio: ', domain);
 
     this.domainIcon = URL_BESTICON.replace('%domain%', domain);
 
     this.contextMenuId = 'vertical-menu-'+RandomInt();
 
+    this.enterEditMode = this.enterEditMode.bind(this);
     this.removeLink = this.removeLink.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleButtonRelease = this.handleButtonRelease.bind(this);
     this.disableLink = this.disableLink.bind(this);
     this.enableLink = this.enableLink.bind(this);
     this.editLink = this.editLink.bind(this);
+    this.openLink = this.openLink.bind(this);
+    this.toggleChange = this.toggleChange.bind(this);
     this.modalClosed = this.modalClosed.bind(this);
+  }
+
+  /**
+   * Abilitazione della modalità di modifica
+   * @param  {boolean} enter se abilitare o meno la modalità di modifica
+   * @param {boolean} uncheck se fare l'uncheck degli elementi
+   */
+  enterEditMode(enter, uncheck) {
+
+    log.debug('Link - enterEditMode, enter: ', enter);
+
+    let checked = this.state.checked;
+    if(uncheck) {
+      checked = false;
+    }
+
+    this.setState({editMode:enter, checked:checked}, () => {
+      log.debug('Link - enterEditMode, this.state: ', this.state);
+    });
+  }
+
+  /**
+   * Check dell'elemento per la modifica multipla
+   */
+  toggleChange() {
+    this.setState({checked: !this.state.checked}, () => {
+      this.props.checkLink(this.state.linkData, this.state.checked);
+    });
   }
 
   /**
@@ -69,7 +102,7 @@ class Link extends React.Component {
    * Modifica di un link esistente
    */
   editLink() {
-    this.modalRef.current.openModal(true, this.props.linkObj);
+    this.modalRef.current.openModal(true, this.state.linkData);
   }
 
   /**
@@ -89,14 +122,14 @@ class Link extends React.Component {
    */
   handleButtonPress () {
     this.buttonPressTimer = setTimeout(() => {
-      alert('long press activated')
+      this.props.enterEditModeFromLeaf();
     }, 1500);
   }
 
   /**
    * Cancellazione del long press
    */
-  handleButtonRelease () {
+  handleButtonRelease() {
     clearTimeout(this.buttonPressTimer);
   }
 
@@ -104,16 +137,17 @@ class Link extends React.Component {
    * Rimozione di un link
    */
   removeLink() {
-    this.props.removeLink(this.props.linkObj, this.props.index);
+    this.props.removeLink(this.state.linkData, this.props.index);
   }
 
   /**
    * Disabilizatione di un link (per il lancio automatico)
    */
   disableLink() {
-    this.setState({enabled: false}, () => {
-      this.props.linkObj.enabled = false;
-      this.props.updateLink(this.props.linkObj, this.props.index);
+    let linkData = this.state.linkData;
+    linkData.enabled = false;
+    this.setState({linkData: linkData}, () => {
+      this.props.updateLink(this.state.linkData, this.props.index);
     });
   }
 
@@ -121,29 +155,52 @@ class Link extends React.Component {
    * Abilitazione di un link (per il lancio automatico)
    */
   enableLink() {
-    this.setState({enabled: true}, () => {
-      this.props.linkObj.enabled = true;
-      this.props.updateLink(this.props.linkObj, this.props.index);
+    let linkData = this.state.linkData;
+    linkData.enabled = true;
+    this.setState({linkData: linkData}, () => {
+      this.props.updateLink(this.state.linkData, this.props.index);
     });
+  }
+
+  /**
+   * Apertura di un sito web
+   */
+  openLink() {
+    if(!this.state.editMode) {
+      OpenLink(this.state.linkData);
+    } else {
+      this.toggleChange();
+    }
   }
 
   render() {
 
-    let link = this.props.linkObj;
+    let link = this.state.linkData;
 
     return (
       <React.Fragment>
-
         <MenuProvider id={this.contextMenuId}>
           <Col
-              className={'domain '+
-                          (!this.state.enabled ? 'domain--disabled ':'')+
-                          (link.incognito ? 'domain--incognito':'')}
+              className={'domain'+
+                          (!this.state.linkData.enabled ? ' domain--disabled':'')+
+                          (link.incognito ? ' domain--incognito':'')+
+                          (this.state.editMode ? ' domain--edit-mode':'')}
               onTouchStart={this.handleButtonPress}
               onTouchEnd={this.handleButtonRelease}
               onMouseDown={this.handleButtonPress}
               onMouseUp={this.handleButtonRelease}
-              onMouseLeave={this.handleButtonRelease}>
+              onMouseLeave={this.handleButtonRelease}
+              onClick={this.openLink}>
+              {
+                this.state.editMode &&
+                (
+                  <input
+                          className="domain__checkbox"
+                          type="checkbox"
+                          checked={this.state.checked}
+                          onChange={this.toggleChange} />
+                )
+              }
             {
               this.state.iconRetrieved &&
               (
@@ -200,7 +257,7 @@ class Link extends React.Component {
           </Item>
           <Separator />
           {
-            this.state.enabled &&
+            this.state.linkData.enabled &&
             (
               <Item onClick={this.disableLink}>
                 <IconFont className="fas fa-minus-square contentmenu-icon" />
@@ -209,7 +266,7 @@ class Link extends React.Component {
             )
           }
           {
-            !this.state.enabled &&
+            !this.state.linkData.enabled &&
             (
               <Item onClick={this.enableLink}>
                 <IconFont className="fas fa-plus-square contentmenu-icon" />
