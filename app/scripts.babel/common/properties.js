@@ -29,3 +29,9 @@ export const AUTHOR_WEB_PAGE = 'https://www.ernestoschiavo.it';
  * @type {String}
  */
 export const AUTHOR = 'Ernesto Schiavo';
+
+/**
+ * Tempo di attesa prima di salvare la preferenza relativa all'orario di funzionamento dell'estensione
+ * @type {Number}
+ */
+export const HOURS_SET_TIME = 1000;

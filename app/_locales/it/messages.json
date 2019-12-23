@@ -94,5 +94,17 @@
   "ASK_BEFORE_OPEN": {
     "message": "Chiedi prima di aprire i siti web",
     "description": ""
+  },
+  "SET_HOURS": {
+    "message": "Consenti l'avvio automatico dei siti web",
+    "description": ""
+  },
+  "HOURS_FROM": {
+    "message": "dalle ore",
+    "description": ""
+  },
+  "HOURS_TO": {
+    "message": "alle ore",
+    "description": ""
   }
 }
