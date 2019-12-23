@@ -1,0 +1,10 @@
+@include block('footer') {
+  @include element('container') {
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #a9a9a9;
+      margin: 0;
+    }
+  }
+}

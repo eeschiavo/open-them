@@ -17,3 +17,15 @@ export const MAX_VISIBLE_ITEMS = 30;
  * @type {Number}
  */
 export const MAX_INCOGNITO_ITEMS = 30;
+
+/**
+ * Pagina web dell'autore dell'estensione
+ * @type {String}
+ */
+export const AUTHOR_WEB_PAGE = 'https://www.ernestoschiavo.it';
+
+/**
+ * L'autore dell'estensione
+ * @type {String}
+ */
+export const AUTHOR = 'Ernesto Schiavo';
