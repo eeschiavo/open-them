@@ -21,11 +21,15 @@ class OptionsPage extends React.Component {
       page: 1
     }
 
+    this.linksPageRef = React.createRef();
+
     this.changePage = this.changePage.bind(this);
   }
 
   changePage(page) {
-    this.setState({page})
+    this.setState({page}, () => {
+      this.linksPageRef.current.closeModals();
+    });
   }
 
   render() {
@@ -33,7 +37,7 @@ class OptionsPage extends React.Component {
       <div className="options-page">
         <Sidebar changePage={this.changePage} />
         <div className={(this.state.page == 1 ? 'options-page--show':'options-page--hide')}>
-          <LinksPage />
+          <LinksPage ref={this.linksPageRef} />
         </div>
         <div className={(this.state.page == 2 ? 'options-page--show':'options-page--hide')}>
           <SettingsPage />
