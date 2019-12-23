@@ -37,8 +37,10 @@
 'blocks/options/domain/__vertical-menu/domain__vertical-menu',
 'blocks/options/domain/__name/domain__name',
 'blocks/options/domain/__name/--incognito/domain__name--incognito',
+'blocks/options/domain/__checkbox/domain__checkbox',
 'blocks/options/domain/--disabled/domain--disabled',
 'blocks/options/domain/--incognito/domain--incognito',
+'blocks/options/domain/--edit-mode/domain--edit-mode',
 'blocks/options/link-modal/__title/link-modal__title',
 'blocks/options/link-modal/__incognito/link-modal__incognito',
 'blocks/options/link-modal/__buttons/link-modal__buttons',
@@ -49,6 +51,10 @@
 'blocks/options/sidebar/__subheader/sidebar__subheader',
 'blocks/options/sidebar/__item/sidebar__item',
 'blocks/options/sidebar/__item/--selected/sidebar__item--selected',
+<<<<<<< HEAD
 'blocks/options/footer/footer',
 'blocks/options/footer/__container/footer__container',
+=======
+'blocks/options/topbar/topbar',
+>>>>>>> It's now possible to edit multiple links together
 'popup';

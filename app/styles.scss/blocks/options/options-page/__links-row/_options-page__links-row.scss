@@ -1,6 +1,7 @@
 @include nestedBlock('options-page') {
   @include nestedElement('links-row') {
     margin: 0 auto;
+    padding: 30px;
 
     .counter-badge-col {
       width: auto !important;
