@@ -9,7 +9,9 @@ class TopBar extends React.Component {
 
     this.state = {
       editMode: false,
-      btnDisabled: true
+      btnDisabled: true,
+      onlyTitle: !!this.props.onlyTitle,
+      title: this.props.title
     };
 
     this.changeButtonsStatus = this.changeButtonsStatus.bind(this);
@@ -81,60 +83,76 @@ class TopBar extends React.Component {
     return (
       <Container className="topbar">
         <Row>
-          <Col>
-            {
-              !this.state.editMode &&
-              (
-                <button
-                  className={'ot-button ot-button--cancel'}
-                  type="button"
-                  onClick={this.startEdit}>
-                  {Localize('EDIT')}
-                </button>
-              )
-            }
-            {
-              this.state.editMode &&
-              (
-                <React.Fragment>
+          {
+            !this.state.onlyTitle &&
+            (
+              <Col>
+                {
+                  !this.state.editMode &&
+                  (
+                    <button
+                      className={'ot-button ot-button--cancel'}
+                      type="button"
+                      onClick={this.startEdit}>
+                      {Localize('EDIT')}
+                    </button>
+                  )
+                }
+                {
+                  this.state.editMode &&
+                  (
+                    <React.Fragment>
 
-                  <button
-                    title={Localize('BUTTON_ENABLE_ALL_LINKS')}
-                    className={'ot-button ot-button--cancel '+
-                      (this.state.btnDisabled ? 'ot-button--disabled':'')}
-                    type="button"
-                    onClick={this.enableLinks}>
-                      <i className="fas fa-plus-square"></i>
-                  </button>
+                      <button
+                        title={Localize('BUTTON_ENABLE_ALL_LINKS')}
+                        className={'ot-button ot-button--cancel '+
+                          (this.state.btnDisabled ? 'ot-button--disabled':'')}
+                        type="button"
+                        onClick={this.enableLinks}>
+                          <i className="fas fa-plus-square"></i>
+                      </button>
 
-                  <button
-                    title={Localize('BUTTON_DISABLE_ALL_LINKS')}
-                    className={'ot-button ot-button--cancel '+
-                    (this.state.btnDisabled ? 'ot-button--disabled':'')}
-                    type="button"
-                    onClick={this.disableLinks}>
-                      <i className="fas fa-minus-square"></i>
-                  </button>
+                      <button
+                        title={Localize('BUTTON_DISABLE_ALL_LINKS')}
+                        className={'ot-button ot-button--cancel '+
+                        (this.state.btnDisabled ? 'ot-button--disabled':'')}
+                        type="button"
+                        onClick={this.disableLinks}>
+                          <i className="fas fa-minus-square"></i>
+                      </button>
 
-                  <button
-                    title={Localize('BUTTON_REMOVE_ALL_LINKS')}
-                    className={'ot-button ot-button--cancel '+
-                    (this.state.btnDisabled ? 'ot-button--disabled':'')}
-                    type="button"
-                    onClick={this.removeLinks}>
-                      <i className="fas fa-trash"></i>
-                  </button>
+                      <button
+                        title={Localize('BUTTON_REMOVE_ALL_LINKS')}
+                        className={'ot-button ot-button--cancel '+
+                        (this.state.btnDisabled ? 'ot-button--disabled':'')}
+                        type="button"
+                        onClick={this.removeLinks}>
+                          <i className="fas fa-trash"></i>
+                      </button>
 
-                  <button className="ot-button ot-button--success"
-                          type="button"
-                          onClick={this.stopEdit}>
-                    {Localize('END')}
-                  </button>
-                </React.Fragment>
-              )
-            }
+                      <button className="ot-button ot-button--success"
+                              type="button"
+                              onClick={this.stopEdit}>
+                        {Localize('END')}
+                      </button>
+                    </React.Fragment>
+                  )
+                }
 
-          </Col>
+              </Col>
+            )
+          }
+          {
+            this.state.onlyTitle &&
+            (
+              <Col>
+                <span className="topbar__title">
+                  {this.state.title}
+                </span>
+              </Col>
+            )
+          }
+
         </Row>
       </Container>
     )
