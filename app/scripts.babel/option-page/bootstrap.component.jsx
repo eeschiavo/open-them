@@ -1,6 +1,5 @@
 import React from 'react';
 import * as log from 'loglevel';
-import Footer from './footer.component.jsx';
 import OptionsPage from './options-page.component.jsx';
 
 /**
@@ -21,7 +20,6 @@ class Bootstrap extends React.Component {
     return (
       <div>
         <OptionsPage />
-        <Footer />
       </div>
     )
   }

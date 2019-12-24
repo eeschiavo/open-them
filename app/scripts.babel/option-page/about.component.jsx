@@ -77,14 +77,14 @@ class About extends React.Component {
             </Row>
 
             {/* L'AUTORE */}
-            <Row className="about-page__section" style={{marginBottom:'30px'}}>
+            <Row className="about-page__section">
               <Col>
                 <p className="about-page__section--title">
                   {Localize('THE_AUTHOR')}
                 </p>
               </Col>
             </Row>
-            <Row className="about-page__section">
+            <Row className="about-page__section" style={{marginTop:'20px'}}>
               <div className="about-page__section--profile">
                 <img src={AUTHOR_IMAGE} className="profile-image" />
               </div>
@@ -106,9 +106,10 @@ class About extends React.Component {
             <Row className="about-page__section">
               <Col>
                 {
-                  this.tps.map(software => {
+                  this.tps.map((software, index) => {
                     return (
                       <Attribution
+                        key={index}
                         link={software.link}
                         name={software.name} />
                     )
