@@ -1,0 +1,7 @@
+@include block('about-page') {
+  @include element('section') {
+    @include modifier('profile') {
+      padding-left: 30px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@include block('sidebar') {
+  @include element('footer') {
+
+    @include not-selectable;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-left: -30px;
+    text-align: center;
+    opacity: .8;
+    font-size: 14px;
+    border-top: 1px solid #a9a9a9;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f6f6f6;
+    }
+
+    .row {
+      margin: 0;
+      padding: 4px 0;
+    }
+  }
+}
