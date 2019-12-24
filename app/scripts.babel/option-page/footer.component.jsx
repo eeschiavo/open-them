@@ -26,7 +26,7 @@ class Footer extends React.Component {
             {'\u00A0'}-{'\u00A0'}
             {Localize('CREATED_BY')}
             {'\u00A0'}
-            <a href={AUTHOR_WEB_PAGE}>{AUTHOR}</a>
+            <a href={AUTHOR_WEB_PAGE} target="_blank">{AUTHOR}</a>
           </p>
         </div>
       </footer>
