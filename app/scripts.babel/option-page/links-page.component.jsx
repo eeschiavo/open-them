@@ -356,6 +356,8 @@ class LinksPage extends React.Component {
     return (
       <Container className="options-page__container">
         <TopBar
+          key={(this.state.links ? this.state.links.length : 0)}
+          enableButton={(this.state.links && this.state.links.length > 0)}
           enableLinks={this.enableLinks}
           disableLinks={this.disableLinks}
           removeLinks={this.removeLinks}

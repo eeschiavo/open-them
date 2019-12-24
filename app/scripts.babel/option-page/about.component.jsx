@@ -9,7 +9,7 @@ function Attribution(props) {
     <Row>
       <Col>
         <span className="about-page__section--description">
-          <a href={props.link} target="blank">{props.name}</a>
+          <a href={props.link} target="_blank">{props.name}</a>
         </span>
       </Col>
     </Row>
@@ -84,7 +84,7 @@ class About extends React.Component {
                 </p>
               </Col>
             </Row>
-            <Row className="about-page__section" style={{marginTop:'20px'}}>
+            <Row className="about-page__section">
               <div className="about-page__section--profile">
                 <img src={AUTHOR_IMAGE} className="profile-image" />
               </div>
@@ -96,7 +96,7 @@ class About extends React.Component {
             </Row>
 
             {/* Software di terze parti */}
-            <Row className="about-page__section">
+            <Row className="about-page__section" style={{marginTop:'20px'}}>
               <Col>
                 <p className="about-page__section--title">
                   {Localize('THIRD_PARTY_SOFTWARE')}
