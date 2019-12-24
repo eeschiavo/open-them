@@ -10,6 +10,7 @@ class TopBar extends React.Component {
     this.state = {
       editMode: false,
       btnDisabled: true,
+      firstBtnDisabled: !this.props.enableButton,
       onlyTitle: !!this.props.onlyTitle,
       title: this.props.title
     };
@@ -63,7 +64,7 @@ class TopBar extends React.Component {
   startEdit() {
     log.info('TopBar - startEdit');
 
-    if(!this.state.editMode) {
+    if(!this.state.editMode && !this.state.firstBtnDisabled) {
       this.props.enterEditMode(true);
       this.setState({editMode: true, btnDisabled: true});
     }
@@ -91,7 +92,8 @@ class TopBar extends React.Component {
                   !this.state.editMode &&
                   (
                     <button
-                      className={'ot-button ot-button--cancel'}
+                      className={'ot-button ot-button--cancel '+
+                                  (this.state.firstBtnDisabled ? 'ot-button--disabled':'')}
                       type="button"
                       onClick={this.startEdit}>
                       {Localize('EDIT')}
