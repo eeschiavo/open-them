@@ -1,86 +1,135 @@
 {
   "appName": {
     "message": "OpenThem",
-    "description": "The name of the application"
+    "description": ""
   },
   "appDescription": {
-    "message": "Apri link con facilità",
-    "description": "The description of the application"
+    "message": "Open websites with ease",
+    "description": ""
   },
   "ADD": {
-    "message": "Aggiungi",
+    "message": "Add",
     "description": ""
   },
   "EDIT": {
-    "message": "Modifica",
+    "message": "Edit",
     "description": ""
   },
   "DISABLE": {
-    "message": "Disabilita",
+    "message": "Disable",
     "description": ""
   },
   "ENABLE": {
-    "message": "Abilita",
+    "message": "Enable",
     "description": ""
   },
   "REMOVE": {
-    "message": "Rimuovi",
+    "message": "Delete",
     "description": ""
   },
   "OPEN_WITH_INCOGNITO_MODE": {
-    "message": "Apri sempre in incognito",
+    "message": "Incognito mode",
     "description": ""
   },
   "NAME": {
-    "message": "Nome",
+    "message": "Name",
     "description": ""
   },
   "LINK": {
-    "message": "Indirizzo",
+    "message": "Link",
     "description": ""
   },
   "ADD_LINK": {
-    "message": "Aggiungi indirizzo",
+    "message": "Add link",
     "description": ""
   },
   "EDIT_LINK": {
-    "message": "Modifica indirizzo",
+    "message": "Edit link",
     "description": ""
   },
   "CANCEL": {
-    "message": "Annulla",
+    "message": "Cancel",
     "description": ""
   },
   "WELCOME_TITLE": {
-    "message": "Benvenuto!",
+    "message": "Welcome!",
     "description": ""
   },
   "WELCOME_DISCLAIMER_FIRST": {
-    "message": "Con OpenThem puoi salvare i link dei tuoi siti web preferiti di modo che vengano aperti ogni volta che lanci Chrome!",
+    "message": "OpenThem opens all your favorite websites everytime you use Chrome!",
     "description": ""
   },
   "WELCOME_DISCLAIMER_SECOND": {
-    "message": "Assicurati di provare tutte le funzionalità di OpenThem, come ad es. la possibilità di aprire link sempre in incognito o di definire l'orario di funzionamento dell'inserzione!",
+    "message": "With OpenThem you can open websites with incognito mode, set ",
+    "message": "Make sure to try all the features of OpenThem, such as the ability to open websites always in incognito mode or to define the operating time of the extension!",
     "description": ""
   },
   "ADD_FIRST_MESSAGE": {
-    "message": "Aggiungi il primo sito web",
+    "message": "Add your first link",
     "description": ""
   },
   "MENU_ITEM_WEBSITE": {
-    "message": "Siti web",
+    "message": "Links",
     "description": ""
   },
   "MENU_ITEM_SETTINGS": {
-    "message": "Impostazioni",
+    "message": "Settings",
     "description": ""
   },
   "CREATED_BY": {
-    "message": "Creata da",
+    "message": "Created by",
     "description": ""
   },
   "END": {
-    "message": "Fine",
+    "message": "End",
+    "description": ""
+  },
+  "ENABLE_EXTENSION": {
+    "message": "Extension enabled",
+    "description": ""
+  },
+  "ENABLE_THIS_DEVICE": {
+    "message": "Enable the extension on this device",
+    "description": ""
+  },
+  "ASK_BEFORE_OPEN": {
+    "message": "Ask before open links",
+    "description": ""
+  },
+  "SET_HOURS": {
+    "message": "Open links only",
+    "description": ""
+  },
+  "HOURS_FROM": {
+    "message": "from",
+    "description": ""
+  },
+  "HOURS_TO": {
+    "message": "to",
+    "description": ""
+  },
+  "ABOUT": {
+    "message": "About",
+    "description": ""
+  },
+  "THE_AUTHOR": {
+    "message": "The author",
+    "description": ""
+  },
+  "AUTHOR_DESCRIPTION": {
+    "message": "My name is Ernesto Schiavo and I live in Genoa, Italy. I love technology and I always want to know new things. I'm a web and mobile proficiency developer.",
+    "description": ""
+  },
+  "WHY_THIS_EXTENSION": {
+    "message": "Why this extension",
+    "description": ""
+  },
+  "EXTENSION_DESCRIPTION": {
+    "message": "I created OpenThem because everytime I launch Google Chrome I'm used to open some websites. One day I asked myself, why not make it automatic?",
+    "description": ""
+  },
+  "THIRD_PARTY_SOFTWARE": {
+    "message": "Third party software",
     "description": ""
   }
 }
