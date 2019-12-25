@@ -21,7 +21,7 @@ class OptionsPage extends React.Component {
 
     this.state = {
       page: 1
-    }
+    };
 
     this.linksPageRef = React.createRef();
 
@@ -31,6 +31,22 @@ class OptionsPage extends React.Component {
   changePage(page) {
     this.setState({page}, () => {
       this.linksPageRef.current.closeModals();
+
+      let pageName = '';
+      switch(page) {
+        case 1:
+          pageName = 'websites';
+          break;
+        case 2:
+          pageName = 'settings';
+          break;
+        case 3:
+          pageName = 'about';
+          break;
+
+      }
+      _gaq.push(['_trackEvent', pageName, 'opened']);
+
     });
   }
 
