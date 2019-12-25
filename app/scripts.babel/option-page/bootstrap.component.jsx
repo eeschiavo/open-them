@@ -14,6 +14,9 @@ class Bootstrap extends React.Component {
    */
   constructor(props) {
     super(props);
+
+    // Google Analytics
+    _gaq.push(['_trackPageview']);
   }
 
   render() {
