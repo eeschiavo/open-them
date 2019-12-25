@@ -9,7 +9,7 @@ function Attribution(props) {
     <Row>
       <Col>
         <span className="about-page__section--description">
-          <a href={props.link} target="blank">{props.name}</a>
+          <a href={props.link} target="_blank">{props.name}</a>
         </span>
       </Col>
     </Row>
@@ -77,7 +77,7 @@ class About extends React.Component {
             </Row>
 
             {/* L'AUTORE */}
-            <Row className="about-page__section" style={{marginBottom:'30px'}}>
+            <Row className="about-page__section">
               <Col>
                 <p className="about-page__section--title">
                   {Localize('THE_AUTHOR')}
@@ -96,7 +96,7 @@ class About extends React.Component {
             </Row>
 
             {/* Software di terze parti */}
-            <Row className="about-page__section">
+            <Row className="about-page__section" style={{marginTop:'20px'}}>
               <Col>
                 <p className="about-page__section--title">
                   {Localize('THIRD_PARTY_SOFTWARE')}
@@ -106,9 +106,10 @@ class About extends React.Component {
             <Row className="about-page__section">
               <Col>
                 {
-                  this.tps.map(software => {
+                  this.tps.map((software, index) => {
                     return (
                       <Attribution
+                        key={index}
                         link={software.link}
                         name={software.name} />
                     )

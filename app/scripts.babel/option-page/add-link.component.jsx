@@ -42,6 +42,13 @@ class AddLink extends React.Component {
   }
 
   /**
+   * Apertura del modal per creare il link
+   */
+  closeModal() {
+    this.modalRef.current.closeModal();
+  }
+
+  /**
    * Chiusura del modal per le informazioni riguardanti il link
    */
   modalClosed(linkData) {
