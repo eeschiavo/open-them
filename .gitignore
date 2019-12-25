@@ -10,3 +10,4 @@ app/scripts
 .idea/
 package-lock.json
 app/styles/main.css
+.DS_Store
