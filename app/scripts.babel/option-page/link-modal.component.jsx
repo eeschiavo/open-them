@@ -131,11 +131,13 @@ class LinkModal extends React.Component {
 
     log.info('AddLink - closeModal');
 
-    this.setState({showModal: false}, () => {
-      this.props.modalClosed(linkData);
-      this.setState(this.initialState);
-    });
+    if(this.state.showModal) {
 
+      this.setState({showModal: false}, () => {
+        this.props.modalClosed(linkData);
+        this.setState(this.initialState);
+      });
+    }
   }
 
   render() {
