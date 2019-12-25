@@ -149,7 +149,7 @@ ChromeStorageSyncGet(['notFirstTime', 'links', 'settings']).then(result => {
 
     });
 
-    chrome.browserAction.setBadgeText({text: 'New'});
+    // chrome.browserAction.setBadgeText({text: 'New'});
     chrome.runtime.openOptionsPage();
   }
 });
