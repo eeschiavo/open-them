@@ -1,11 +1,11 @@
 {
   "appName": {
     "message": "OpenThem",
-    "description": "The name of the application"
+    "description": ""
   },
   "appDescription": {
     "message": "Apri link con facilità",
-    "description": "The description of the application"
+    "description": ""
   },
   "ADD": {
     "message": "Aggiungi",
@@ -60,7 +60,7 @@
     "description": ""
   },
   "WELCOME_DISCLAIMER_SECOND": {
-    "message": "Assicurati di provare tutte le funzionalità di OpenThem, come ad es. la possibilità di aprire link sempre in incognito o di definire l'orario di funzionamento dell'inserzione!",
+    "message": "Assicurati di provare tutte le funzionalità di OpenThem, come ad esmpio la possibilità di aprire siti web sempre in incognito o di definire l'orario di funzionamento dell'estensione!",
     "description": ""
   },
   "ADD_FIRST_MESSAGE": {
@@ -116,7 +116,7 @@
     "description": ""
   },
   "AUTHOR_DESCRIPTION": {
-    "message": "Mi chiamo Ernesto Schiavo e sono un Ingegnere Informatico. Mi piace imparare sempre cose nuove e sono specializzato nello sviluppo di applicativi per il web.",
+    "message": "Mi chiamo Ernesto Schiavo e vivo a Genova (Italia). Sono appassionato di tecnologia e mi piace imparare sempre cose nuove. Sono specializzato nello sviluppo di applicativi per il web e per dispostiivi mobile.",
     "description": ""
   },
   "WHY_THIS_EXTENSION": {
