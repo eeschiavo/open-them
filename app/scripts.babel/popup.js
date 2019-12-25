@@ -41,10 +41,10 @@ let openOptions = function() {
   console.log('Apro la pagina delle opzioni')
   log.info('openOptions - apertura pagina options');
   chrome.runtime.openOptionsPage();
-}
+};
 
 // rimuovo il badge
-chrome.browserAction.setBadgeText({text: ''});
+// chrome.browserAction.setBadgeText({text: ''});
 
 ReactDOM.render(
   <Popup />,
