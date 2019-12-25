@@ -1,0 +1,6 @@
+@include block('add-link') {
+  @include element('extended') {
+    max-width: 250px !important;
+    width: 250px;
+  }
+}

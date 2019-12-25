@@ -1,10 +1,135 @@
 {
   "appName": {
     "message": "OpenThem",
-    "description": "The name of the application"
+    "description": ""
   },
   "appDescription": {
-    "message": "Open links with ease",
-    "description": "The description of the application"
+    "message": "Open websites with ease",
+    "description": ""
+  },
+  "ADD": {
+    "message": "Add",
+    "description": ""
+  },
+  "EDIT": {
+    "message": "Edit",
+    "description": ""
+  },
+  "DISABLE": {
+    "message": "Disable",
+    "description": ""
+  },
+  "ENABLE": {
+    "message": "Enable",
+    "description": ""
+  },
+  "REMOVE": {
+    "message": "Delete",
+    "description": ""
+  },
+  "OPEN_WITH_INCOGNITO_MODE": {
+    "message": "Incognito mode",
+    "description": ""
+  },
+  "NAME": {
+    "message": "Name",
+    "description": ""
+  },
+  "LINK": {
+    "message": "Link",
+    "description": ""
+  },
+  "ADD_LINK": {
+    "message": "Add link",
+    "description": ""
+  },
+  "EDIT_LINK": {
+    "message": "Edit link",
+    "description": ""
+  },
+  "CANCEL": {
+    "message": "Cancel",
+    "description": ""
+  },
+  "WELCOME_TITLE": {
+    "message": "Welcome!",
+    "description": ""
+  },
+  "WELCOME_DISCLAIMER_FIRST": {
+    "message": "OpenThem opens all your favorite websites everytime you use Chrome!",
+    "description": ""
+  },
+  "WELCOME_DISCLAIMER_SECOND": {
+    "message": "With OpenThem you can open websites with incognito mode, set ",
+    "message": "Make sure to try all the features of OpenThem, such as the ability to open websites always in incognito mode or to define the operating time of the extension!",
+    "description": ""
+  },
+  "ADD_FIRST_MESSAGE": {
+    "message": "Add your first link",
+    "description": ""
+  },
+  "MENU_ITEM_WEBSITE": {
+    "message": "Links",
+    "description": ""
+  },
+  "MENU_ITEM_SETTINGS": {
+    "message": "Settings",
+    "description": ""
+  },
+  "CREATED_BY": {
+    "message": "Created by",
+    "description": ""
+  },
+  "END": {
+    "message": "End",
+    "description": ""
+  },
+  "ENABLE_EXTENSION": {
+    "message": "Extension enabled",
+    "description": ""
+  },
+  "ENABLE_THIS_DEVICE": {
+    "message": "Enable the extension on this device",
+    "description": ""
+  },
+  "ASK_BEFORE_OPEN": {
+    "message": "Ask before open links",
+    "description": ""
+  },
+  "SET_HOURS": {
+    "message": "Open links only",
+    "description": ""
+  },
+  "HOURS_FROM": {
+    "message": "from",
+    "description": ""
+  },
+  "HOURS_TO": {
+    "message": "to",
+    "description": ""
+  },
+  "ABOUT": {
+    "message": "About",
+    "description": ""
+  },
+  "THE_AUTHOR": {
+    "message": "The author",
+    "description": ""
+  },
+  "AUTHOR_DESCRIPTION": {
+    "message": "My name is Ernesto Schiavo and I live in Genoa, Italy. I love technology and I always want to know new things. I'm a web and mobile proficiency developer.",
+    "description": ""
+  },
+  "WHY_THIS_EXTENSION": {
+    "message": "Why this extension",
+    "description": ""
+  },
+  "EXTENSION_DESCRIPTION": {
+    "message": "I created OpenThem because everytime I launch Google Chrome I'm used to open some websites. One day I asked myself, why not make it automatic?",
+    "description": ""
+  },
+  "THIRD_PARTY_SOFTWARE": {
+    "message": "Third party software",
+    "description": ""
   }
 }

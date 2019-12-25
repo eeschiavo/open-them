@@ -1,0 +1,17 @@
+@include nestedBlock('domain') {
+  @include nestedElement('vertical-menu') {
+
+    @include appearance-none;
+    position: absolute;
+    background: none;
+    border: none;
+    top: 8px;
+    right: 8px;
+    height: 20px;
+    width: 15px;
+    background-image: url(../images/icons/vertical-menu.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    outline: 0;
+  }
+}

@@ -1,0 +1,11 @@
+@include block('options-page') {
+  @include element('links-row') {
+    @include modifier('incognito') {
+      @include border-radius(8px);
+      background-color: #1b1e21;
+      width: auto !important;
+      margin-top: 20px !important;
+      padding: 20px;
+    }
+  }
+}

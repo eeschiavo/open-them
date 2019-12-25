@@ -1,0 +1,9 @@
+@include block('about-page') {
+  @include element('section') {
+    @include modifier('description') {
+      padding: 0 10px;
+      font-size: 14px;
+      text-align: justify;
+    }
+  }
+}

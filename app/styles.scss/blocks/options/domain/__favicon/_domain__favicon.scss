@@ -1,0 +1,10 @@
+@include nestedBlock('domain') {
+  @include nestedElement('favicon') {
+
+    @include border-radius(50%);
+    width: $link-image-width;
+    height: $link-image-height;
+    padding: 10px;
+    background: $link-image-background-color;
+  }
+}

@@ -1,0 +1,19 @@
+@include block('settings-page') {
+  @include element('col') {
+
+    .form-switch {
+      justify-content: flex-end;
+      margin: 0;
+      padding: 10px 0;
+
+      i {
+        margin: 0 25px;
+      }
+    }
+
+    .row:nth-child(even) {
+      @include border-radius(8px);
+      background-color: white;
+    }
+  }
+}

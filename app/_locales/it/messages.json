@@ -1,0 +1,134 @@
+{
+  "appName": {
+    "message": "OpenThem",
+    "description": ""
+  },
+  "appDescription": {
+    "message": "Apri link con facilità",
+    "description": ""
+  },
+  "ADD": {
+    "message": "Aggiungi",
+    "description": ""
+  },
+  "EDIT": {
+    "message": "Modifica",
+    "description": ""
+  },
+  "DISABLE": {
+    "message": "Disabilita",
+    "description": ""
+  },
+  "ENABLE": {
+    "message": "Abilita",
+    "description": ""
+  },
+  "REMOVE": {
+    "message": "Rimuovi",
+    "description": ""
+  },
+  "OPEN_WITH_INCOGNITO_MODE": {
+    "message": "Apri sempre in incognito",
+    "description": ""
+  },
+  "NAME": {
+    "message": "Nome",
+    "description": ""
+  },
+  "LINK": {
+    "message": "Indirizzo",
+    "description": ""
+  },
+  "ADD_LINK": {
+    "message": "Aggiungi indirizzo",
+    "description": ""
+  },
+  "EDIT_LINK": {
+    "message": "Modifica indirizzo",
+    "description": ""
+  },
+  "CANCEL": {
+    "message": "Annulla",
+    "description": ""
+  },
+  "WELCOME_TITLE": {
+    "message": "Benvenuto!",
+    "description": ""
+  },
+  "WELCOME_DISCLAIMER_FIRST": {
+    "message": "Con OpenThem puoi salvare i link dei tuoi siti web preferiti di modo che vengano aperti ogni volta che lanci Chrome!",
+    "description": ""
+  },
+  "WELCOME_DISCLAIMER_SECOND": {
+    "message": "Assicurati di provare tutte le funzionalità di OpenThem, come ad esmpio la possibilità di aprire siti web sempre in incognito o di definire l'orario di funzionamento dell'estensione!",
+    "description": ""
+  },
+  "ADD_FIRST_MESSAGE": {
+    "message": "Aggiungi il primo sito web",
+    "description": ""
+  },
+  "MENU_ITEM_WEBSITE": {
+    "message": "Siti web",
+    "description": ""
+  },
+  "MENU_ITEM_SETTINGS": {
+    "message": "Impostazioni",
+    "description": ""
+  },
+  "CREATED_BY": {
+    "message": "Creata da",
+    "description": ""
+  },
+  "END": {
+    "message": "Fine",
+    "description": ""
+  },
+  "ENABLE_EXTENSION": {
+    "message": "Estensione abilitata",
+    "description": ""
+  },
+  "ENABLE_THIS_DEVICE": {
+    "message": "Abilita estensione su questo dispositivo",
+    "description": ""
+  },
+  "ASK_BEFORE_OPEN": {
+    "message": "Chiedi prima di aprire i siti web",
+    "description": ""
+  },
+  "SET_HOURS": {
+    "message": "Consenti l'avvio automatico dei siti web",
+    "description": ""
+  },
+  "HOURS_FROM": {
+    "message": "dalle ore",
+    "description": ""
+  },
+  "HOURS_TO": {
+    "message": "alle ore",
+    "description": ""
+  },
+  "ABOUT": {
+    "message": "Per saperne di più",
+    "description": ""
+  },
+  "THE_AUTHOR": {
+    "message": "L'autore",
+    "description": ""
+  },
+  "AUTHOR_DESCRIPTION": {
+    "message": "Mi chiamo Ernesto Schiavo e vivo a Genova (Italia). Sono appassionato di tecnologia e mi piace imparare sempre cose nuove. Sono specializzato nello sviluppo di applicativi per il web e per dispostiivi mobile.",
+    "description": ""
+  },
+  "WHY_THIS_EXTENSION": {
+    "message": "Perché questa estensione",
+    "description": ""
+  },
+  "EXTENSION_DESCRIPTION": {
+    "message": "OpenThem nasce da un'esigenza personale. Sono abituato ad avviare sempre determinati siti ad ogni apertura di Chrome. Un giorno mi sono chiesto, perché non renderlo automatico?",
+    "description": ""
+  },
+  "THIRD_PARTY_SOFTWARE": {
+    "message": "Software di terze parti utilizzati",
+    "description": ""
+  }
+}

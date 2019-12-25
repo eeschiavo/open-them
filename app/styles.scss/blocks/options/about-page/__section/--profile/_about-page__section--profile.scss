@@ -1,0 +1,13 @@
+@include block('about-page') {
+  @include element('section') {
+    @include modifier('profile') {
+      padding-left: 30px;
+
+      & ~ .col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@include block('counter-badge') {
+  @include modifier('incognito') {
+    background-color: white;
+    color: #333;
+    margin-bottom: 0;
+  }
+}

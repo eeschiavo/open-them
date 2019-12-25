@@ -1,0 +1,20 @@
+.add-link {
+  max-width: 110px !important;
+  min-width: 110px;
+  min-height: 120px;
+  max-height: 120px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  &:hover {
+    background-color: white;
+    cursor: pointer;
+
+    .add-link__button {
+      transform: scale(1.1);
+    }
+  }
+}

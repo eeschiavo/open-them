@@ -1,0 +1,10 @@
+@include block('sidebar') {
+  @include element('item') {
+    @include modifier('selected') {
+      @include border-radius(4px);
+      font-weight: 600;
+      background: $color-success;
+      color: white;
+    }
+  }
+}

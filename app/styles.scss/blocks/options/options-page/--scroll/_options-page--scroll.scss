@@ -1,0 +1,6 @@
+@include element('options-page') {
+  @include modifier('scroll') {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+}

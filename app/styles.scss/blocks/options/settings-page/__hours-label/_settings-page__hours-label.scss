@@ -1,0 +1,23 @@
+@include block('settings-page') {
+  @include element('hours-label') {
+    width: 100%;
+    padding: 10px 0px;
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    div {
+      text-align: right;
+      margin-bottom: 5px;
+
+      span {
+        margin-right: 19px;
+      }
+
+      input {
+        margin-right: 8px;
+      }
+    }
+  }
+}

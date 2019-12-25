@@ -53,7 +53,18 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('html',  () => {
+gulp.task('styles', () => {
+  return gulp.src('app/styles.scss/*.scss')
+    .pipe($.plumber())
+    .pipe($.sass.sync({
+      outputStyle: 'expanded',
+      precision: 10,
+      includePaths: ['.']
+    }).on('error', $.sass.logError))
+    .pipe(gulp.dest('app/styles'));
+});
+
+gulp.task('html', ['styles'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.sourcemaps.init())
@@ -72,7 +83,7 @@ gulp.task('html',  () => {
 gulp.task('chromeManifest', () => {
   return gulp.src('app/manifest.json')
     .pipe($.chromeManifest({
-      buildnumber: true,
+      buildnumber: false,
       background: {
         target: 'scripts/background.js',
         exclude: [
@@ -100,7 +111,10 @@ gulp.task('babel', () => {
    browserify({
      entries: `./app/scripts.babel/${file}`,
      debug: true
-   }).transform('babelify', { presets: ['@babel/preset-env', '@babel/react'] })
+   }).transform('babelify', { presets: [
+     '@babel/preset-env',
+     '@babel/react'
+   ] })
      .bundle()
      .pipe(source(file))
      .pipe(gulp.dest('app/scripts'))
@@ -123,6 +137,9 @@ gulp.task('watch', ['lint', 'babel'], () => {
   ]).on('change', $.livereload.reload);
 
   gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/scripts.babel/**/*.jsx', ['lint', 'babel']);
+  gulp.watch('app/scripts.babel/popup-page/*.js', ['lint', 'babel']);
+  gulp.watch('app/styles.scss/**/*.scss', ['styles']);
   gulp.watch('bower.json', ['wiredep']);
 });
 
@@ -145,9 +162,20 @@ gulp.task('package', function () {
       .pipe(gulp.dest('package'));
 });
 
+gulp.task('copy', function () {
+  gulp.src(['node_modules/bootstrap/dist/**/*'])
+    .pipe(gulp.dest('dist/scripts/libs/bootstrap'));
+  gulp.src(['node_modules/react-contexify/dist/*'])
+      .pipe(gulp.dest('dist/scripts/libs/react-contexify'));
+  gulp.src(['node_modules/@fortawesome/fontawesome-free/**/*'])
+  .pipe(gulp.dest('dist/scripts/libs/fontawesome'));
+  gulp.src(['app/styles.scss/fonts/**/*'])
+    .pipe(gulp.dest('dist/styles/fonts'));
+});
+
 gulp.task('build', (cb) => {
   runSequence(
-    'lint', 'babel', 'chromeManifest',
+    'copy', 'lint', 'babel', 'chromeManifest',
     ['html', 'images', 'extras'],
     'size', cb);
 });

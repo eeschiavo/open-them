@@ -1,0 +1,7 @@
+@include block('domain') {
+  @include element('name') {
+    @include modifier('incognito') {
+      color: white !important;
+    }
+  }
+}
