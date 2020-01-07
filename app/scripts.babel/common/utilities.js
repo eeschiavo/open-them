@@ -1,7 +1,7 @@
 
 /**
  * Apertura di un link in un nuovo tab
- * @param       {[type]} link il link da aprire
+ * @param       {object} link il link da aprire
  */
 export function OpenLink(link) {
 
@@ -83,4 +83,16 @@ export function ExtractHostname(url) {
   hostname = hostname.split('?')[0];
 
   return hostname;
+}
+
+
+/**
+ * Apertura di Twitter
+ * @constructor
+ */
+export function OpenTwitter() {
+
+  OpenLink({
+    url: 'https://twitter.com/ernesto_schiavo'
+  });
 }
