@@ -40,7 +40,7 @@ export const HOURS_SET_TIME = 1000;
  * URL per l'immagine dell'autore
  * @type {String}
  */
-export const AUTHOR_IMAGE = 'https://ernestoschiavo.it/wp-content/uploads/2015/03/fotoProfilo-e1519477271732.png';
+export const AUTHOR_IMAGE = 'https://ernestoschiavo.it/img/profile.png';
 
 /**
  * Link dei software di terze parti utilizzati
